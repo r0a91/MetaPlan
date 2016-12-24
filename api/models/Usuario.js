@@ -8,7 +8,23 @@
 module.exports = {
 
   attributes: {
+    telefono:{
+      type:'string'
+    },
+    email:{
+      type:'email',
+      required:true,
+      unique:true
+    },
+    contrasena:{
+      type:'string'
+    },
+    persona:{
+      model:'persona'
+    },
+    rol:{
+      model: 'rol'
+    }
 
   }
 };
-

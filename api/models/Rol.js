@@ -8,7 +8,19 @@
 module.exports = {
 
   attributes: {
+    nombre:{
+      type:'string',
+      required:true
+    },
+    usuarios:{
+      collection:'usuario',
+      via:'rol'
+    },
+    permisos:{
+      collection:'permiso',
+      via:'permiso',
+      through: 'rolpermiso'
+    }
 
   }
 };
-

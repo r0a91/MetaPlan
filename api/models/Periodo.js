@@ -8,7 +8,10 @@
 module.exports = {
 
   attributes: {
-
+    numero_periodo:{
+      type:'integer',
+      required:true,
+      enum: [1, 2, 3, 4]
+    }
   }
 };
-
