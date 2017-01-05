@@ -8,15 +8,14 @@
 module.exports = {
 
   attributes: {
-    nombre:{
-      type:'string',
-      required:true
+    num_permiso: {
+      type: 'integer',
+      required: 'true'
     },
-    roles:{
-      collection:'rol',
-      via:'rol',
-      through:'rolpermiso'
+    roles: {
+      collection: 'rol',
+      via: 'permiso',
+      through: 'permiso_rol'
     }
-
   }
 };

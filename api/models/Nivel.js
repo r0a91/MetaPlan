@@ -8,10 +8,13 @@
 module.exports = {
 
   attributes: {
-    nombre:{
-      type:'string',
-      required:true,
-
+    nombre: {
+      type: 'string',
+      required: true
+    },
+    mallas: {
+      collection: 'malla',
+      via: 'nivel'
     }
   }
 };

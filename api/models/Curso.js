@@ -8,10 +8,14 @@
 module.exports = {
 
   attributes: {
-    numero_curso:{
-      type:'integer',
-      required:true,
-      autoIncrement:true
+    num_curso: {
+      type: 'string',
+      required: true
+    },
+    mallas: {
+      collection: 'malla',
+      via: 'curso',
+      through: 'malla_curso'
     }
   }
 };

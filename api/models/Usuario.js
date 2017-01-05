@@ -8,23 +8,27 @@
 module.exports = {
 
   attributes: {
-    telefono:{
-      type:'string'
+    email: {
+      type: 'email',
+      required: true,
+      unique: true
     },
-    email:{
-      type:'email',
-      required:true,
-      unique:true
+    telefono_celular: {
+      type: 'string',
     },
-    contrasena:{
-      type:'string'
-    },
-    persona:{
-      model:'persona'
-    },
-    rol:{
+    rol: {
       model: 'rol'
+    },
+    persona: {
+      model: 'persona'
+    },
+    profesores_a_cargo: {
+      collection: 'coordinador_Docente',
+      via: 'id_profesor'
+    },
+    mallas: {
+      collection: 'malla',
+      via: 'docente'
     }
-
   }
 };

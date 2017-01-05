@@ -8,10 +8,19 @@
 module.exports = {
 
   attributes: {
-    numero_periodo:{
-      type:'integer',
-      required:true,
-      enum: [1, 2, 3, 4]
+    num_periodo: {
+      type: 'string',
+      enum: ['01', '02', '03', '04']
+    },
+    mallas: {
+      collection: 'malla',
+      via: 'periodo',
+      through: 'malla_periodo'
+    },
+    logros: {
+      collection: 'logro',
+      via: 'periodo'
     }
+
   }
 };

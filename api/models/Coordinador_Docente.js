@@ -1,5 +1,5 @@
 /**
- * Persona.js
+ * Coordinador_Docente.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -8,19 +8,15 @@
 module.exports = {
 
   attributes: {
-    nombre: {
-      type: 'string',
-      required: true
-    },
-    apellido: {
-      type: 'string',
-      required: true
-    },
-    nit: {
-      type: 'string'
-    },
-    usuario: {
+    id_coordinador: {
       model: 'usuario'
+    },
+    id_profesor: {
+      model: 'usuario'
+    },
+    comentarios: {
+      collection: 'comentario',
+      via: 'publicante'
     }
   }
 };

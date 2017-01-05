@@ -8,7 +8,30 @@
 module.exports = {
 
   attributes: {
-
+    periodo: {
+      model: 'periodo'
+    },
+    num_logro: {
+      type: 'integer'
+    },
+    objetivo_general: {
+      type: 'string'
+    },
+    referentes_teoricos:{
+      type: 'string'
+    },
+    numero_sesiones:{
+      type:'integer'
+    },
+    sesion:{
+      collection:'sesion',
+      via:'logro'
+    },
+    fecha_inicio:{
+      type:'date'
+    },
+    fecha_final:{
+      type:'date'
+    }
   }
 };
-

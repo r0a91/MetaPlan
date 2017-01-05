@@ -1,7 +1,7 @@
 /**
- * PermisoController
+ * SesionController
  *
- * @description :: Server-side logic for managing permisoes
+ * @description :: Server-side logic for managing sesions
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 

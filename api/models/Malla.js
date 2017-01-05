@@ -8,7 +8,24 @@
 module.exports = {
 
   attributes: {
-
+    docente: {
+      model: 'usuario'
+    },
+    asignatura: {
+      model: 'asignatura'
+    },
+    nivel: {
+      model: 'nivel'
+    },
+    cursos: {
+      collection: 'curso',
+      via: 'malla',
+      through: 'malla_curso'
+    },
+    periodos: {
+      collection: 'periodo',
+      via: 'malla',
+      through: 'malla_periodo'
+    }
   }
 };
-
