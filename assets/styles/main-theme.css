@@ -1,0 +1,11 @@
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+.sesiones-panel, .last-panel{
+  margin-bottom: 25px;
+}
+.btn-addses{
+  margin-top: 25px;
+}

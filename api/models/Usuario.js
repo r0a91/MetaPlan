@@ -8,6 +8,17 @@
 module.exports = {
 
   attributes: {
+    nombre: {
+      type: 'string',
+      required: true
+    },
+    apellido: {
+      type: 'string',
+      required: true
+    },
+    nit: {
+      type: 'string'
+    },
     email: {
       type: 'email',
       required: true,
@@ -18,9 +29,6 @@ module.exports = {
     },
     rol: {
       model: 'rol'
-    },
-    persona: {
-      model: 'persona'
     },
     profesores_a_cargo: {
       collection: 'coordinador_Docente',

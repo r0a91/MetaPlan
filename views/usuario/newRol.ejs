@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>CREAR ROL</h1>
+  <form class="rol-form" action="rol/create" method="post">
+
+    <label>Nombre:</label>
+    <input type="text" name="nombre" class="form-control">
+
+    <label>Permisos:</label>
+    <div class="permisos">
+      <% _.each(permisos, function (componente) { %>
+        <label><input type="checkbox" name="permisoid" value="<%= componente.id %>"><%= componente.num_permiso %></label>
+        <% }) %>
+    </div>
+
+    <input type="submit" name="submitButton" value="CreateRol">
+  </form>
+</div>

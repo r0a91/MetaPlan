@@ -7,19 +7,19 @@
 
 module.exports = {
 
-  attributes: {
-    nombre: {
-      type: 'string',
-      required: true
-    },
-    permisos: {
-      collection: 'permiso',
-      via: 'rol',
-      through: 'permiso_rol'
-    },
-    usuarios: {
-      collection: 'usuario',
-      via: 'rol'
+    attributes: {
+      nombre: {
+        type: 'string',
+        required: true
+      },
+      permisos: {
+        collection: 'permiso',
+        via: 'rol',
+        through: 'permiso_rol'
+      },
+      usuarios: {
+        collection: 'usuario',
+        via: 'rol'
+      }
     }
-  }
 };

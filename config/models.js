@@ -9,6 +9,7 @@
  * http://sailsjs.org/#!/documentation/concepts/ORM
  */
 
- module.exports.models = {
-   'connection': 'localMongoDb'
- };
+module.exports.models = {
+  connection: 'localMongoDb',
+  migrate: 'alter'
+};

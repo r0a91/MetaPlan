@@ -17,21 +17,30 @@ module.exports = {
     objetivo_general: {
       type: 'string'
     },
-    referentes_teoricos:{
+    referentes_teoricos: {
       type: 'string'
     },
-    numero_sesiones:{
-      type:'integer'
+    numero_sesiones: {
+      type: 'integer'
     },
-    sesion:{
-      collection:'sesion',
-      via:'logro'
+    sesion: {
+      collection: 'sesion',
+      via: 'logro'
     },
-    fecha_inicio:{
-      type:'date'
+    fecha_inicio: {
+      type: 'date'
     },
-    fecha_final:{
-      type:'date'
+    fecha_final: {
+      type: 'date'
+    },
+    recursos: {
+      type: 'string'
+    },
+    evaluacion: {
+      type: 'string'
+    },
+    observacion_docente: {
+      type: 'string'
     }
   }
 };

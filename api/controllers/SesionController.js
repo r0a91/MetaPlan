@@ -1,7 +1,7 @@
 /**
  * SesionController
  *
- * @description :: Server-side logic for managing sesions
+ * @description :: Server-side logic for managing Sesions
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 

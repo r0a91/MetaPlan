@@ -10,7 +10,8 @@ module.exports = {
   attributes: {
     num_permiso: {
       type: 'integer',
-      required: 'true'
+      required: true,
+      unique: true
     },
     roles: {
       collection: 'rol',

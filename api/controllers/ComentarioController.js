@@ -1,7 +1,7 @@
 /**
- * MallaController
+ * ComentarioController
  *
- * @description :: Server-side logic for managing Mallas
+ * @description :: Server-side logic for managing Comentarios
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 

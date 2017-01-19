@@ -1,7 +1,7 @@
 /**
- * MallaController
+ * PeriodoController
  *
- * @description :: Server-side logic for managing Mallas
+ * @description :: Server-side logic for managing Periodoes
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 

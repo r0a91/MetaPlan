@@ -8,18 +8,18 @@
 module.exports = {
 
   attributes: {
-    num_sesion:{
-      type:'integer',
+    num_sesion: {
+      type: 'integer',
       autoIncrement: true
     },
-    descripcion:{
-      type:'string'
+    logro: {
+      model: 'logro'
     },
-    curso:{
-      model:'curso'
+    descripcion: {
+      type: 'string'
     },
-    fecha:{
-      type:'date'
+    fecha: {
+      type: 'date'
     }
   }
 };
