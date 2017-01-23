@@ -35,9 +35,5 @@ module.exports = {
       collection: 'malla',
       via: 'docente'
     }
-  },
-  isDocente
-  function() {
-
   }
 };
