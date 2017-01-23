@@ -24,9 +24,6 @@ module.exports = {
       required: true,
       unique: true
     },
-    telefono_celular: {
-      type: 'string',
-    },
     rol: {
       model: 'rol'
     },
@@ -38,5 +35,9 @@ module.exports = {
       collection: 'malla',
       via: 'docente'
     }
+  },
+  isDocente
+  function() {
+
   }
 };

@@ -1,0 +1,20 @@
+<div class="container">
+  <form class="" action="usuario/create" method="post">
+    <label>Nombre</label>
+    <input type="text" name="nombre" class="form-control">
+    <label>Apellido</label>
+    <input type="text" name="apellido" class="form-control">
+    <label>NIT</label>
+    <input type="text" name="nit" class="form-control">
+    <label>email</label>
+    <input type="email" name="email" class="form-control">
+    <label>rol</label>
+    <div class="roles" ng-controller="RolCtrl">
+      <div ng-repeat="rol in roles">
+        <label><input type="radio" name="rol" value="{{rol.id}}">{{rol.nombre}}</label>
+      </div>
+    </div>
+    <input type="submit" name="submitButton" value="CreateUsuario">
+  </form>
+
+</div>

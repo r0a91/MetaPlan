@@ -59,6 +59,10 @@ module.exports.routes = {
     controller: 'LogroController',
     action: 'new'
   },
+  'GET /createUsuario': {
+    controller: 'UsuarioController',
+    action: 'new'
+  },
   'POST /createlogro': 'LogroController.create',
   'POST /createsesion': 'SesionController.create'
 

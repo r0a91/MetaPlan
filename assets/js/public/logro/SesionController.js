@@ -22,4 +22,15 @@ angular.module('myAPP.controllers', []).controller('SesionCtrl', ['$scope', func
   });
 }]).controller('LogroCtrl', ['$scope', '$http', function($scope, $http) {
   $scope.logroCreate = function() {}
+}]).controller('RolCtrl', ['$scope', '$http', function($scope, $http) {
+  $http({
+    method: 'GET',
+    url: '/rol'
+  }).then(function successCallback(response) {
+      $scope.roles = response.data;
+      console.log($scope.roles);
+    },
+    function errorCallback(response) {
+      console.log(response.statusText);
+    });
 }])
