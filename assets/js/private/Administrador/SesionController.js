@@ -1,4 +1,4 @@
-angular.module('myAPP.controllers', []).controller('SesionCtrl', ['$scope', function($scope) {
+angular.module('AdministradorAPP.controllers', []).controller('SesionCtrl', ['$scope', function($scope) {
   var sesiones = $scope.sesiones = [];
 
   $scope.addSesion = function(num, desc, date) {

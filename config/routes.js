@@ -34,37 +34,7 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  },
-  'GET /createPermiso': {
-    controller: 'PermisoController',
-    action: 'new'
-  },
-  'GET /createrol': {
-    controller: 'RolController',
-    action: 'new'
-  },
-  'GET /createcurso': {
-    controller: 'CursoController',
-    action: 'new'
-  },
-  'GET /createnivel': {
-    controller: 'NivelController',
-    action: 'new'
-  },
-  'GET /createasignatura': {
-    controller: 'AsignaturaController',
-    action: 'new'
-  },
-  'GET /createlogro': {
-    controller: 'LogroController',
-    action: 'new'
-  },
-  'GET /createUsuario': {
-    controller: 'UsuarioController',
-    action: 'new'
-  },
-  'POST /createlogro': 'LogroController.create',
-  'POST /createsesion': 'SesionController.create'
+  }
 
   /***************************************************************************
    *                                                                          *

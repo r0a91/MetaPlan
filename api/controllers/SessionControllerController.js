@@ -1,7 +1,7 @@
 /**
- * Coordinador_DocenteController
+ * SessionControllerController
  *
- * @description :: Server-side logic for managing Coordinador_docentes
+ * @description :: Server-side logic for managing sessioncontrollers
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
