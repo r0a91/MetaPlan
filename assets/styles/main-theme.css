@@ -57,6 +57,21 @@ table, th , td {
 .footer-info{
   text-align: center;
 }
-
-
 /* FIN FOOTER STYLE */
+/* LOGIN FORM STYLE*/
+.contenedor-login-form{
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.text-label{
+  padding: 0;
+  margin: 0;
+}
+.btn-container{
+  padding: 10px 5px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* END LOGIN FORM STYLE*/
