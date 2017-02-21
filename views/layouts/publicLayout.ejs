@@ -20,13 +20,36 @@
 </head>
 
 <body>
-  <div class="container">
+  <!-- HEADER -->
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand brand-MetaPlan" href="/">
+          <div class="logo-header-container">
+            <img src="/images/LogoMetaPlan.svg" alt="logoHeader" class="img-responsive logo-header">
+          </div>
+        </a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
 
-  </div>
+      </ul>
+    </div>
+    <div class="container-fluid header-amarillo"></div>
+    <div class="container-fluid header-cafe"></div>
+  </nav>
+
   <%- body %>
 
-  <div class="container">
-
+<!-- FOOTER -->
+  <div class="container-fluid navbar navbar-default navbar-static-bottom footer">
+    <div class="container-fluid footer-cafe"></div>
+    <div class="container-fluid footer-amarillo"></div>
+    <div class="container footer-info">
+      <h5><b>CONTACTO:</b>Manuel Francisco Sopo Barrientos</h5>
+      <h6><i>manuel_sopo@gmail.com</i></h6>
+    </div>
   </div>
 
     <!--TEMPLATES-->
