@@ -6,8 +6,5 @@
  */
 
 module.exports = {
-  new: function(req, res) {
-    console.log('entre al formulario de crear Logro');
-    res.view('logro/newLogro');
-  }
+  
 };

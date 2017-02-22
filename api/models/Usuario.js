@@ -19,7 +19,7 @@ module.exports = {
     nit: {
       type: 'string'
     },
-    email: {
+    correo: {
       type: 'email',
       required: true,
       unique: true

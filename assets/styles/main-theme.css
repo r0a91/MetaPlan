@@ -9,3 +9,69 @@ table, th , td {
 .btn-addses{
   margin-top: 25px;
 }
+
+/* HEADER STYLE */
+.brand-MetaPlan{
+  padding: 0px;
+}
+.logo-header-container{
+  width: 100px;
+  height: 50px;
+}
+.logo-header{
+  width: 100%;
+  height: 100%;
+}
+.header-amarillo{
+  height: 75px;
+  background-color: #ff8000;
+}
+.header-cafe{
+  height: 75px;
+  background-color: #9c6141;
+}
+/* FIN HEADER STYLE */
+/* MAINVIEW STYLE */
+.contenedor-principal{
+  text-align: center;
+}
+.contenerdor-LogoPrincipal{
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.contenerdor-textoPrincipal{
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+/* FIN HEADER STYLE */
+/* FOOTER STYLE */
+
+.footer-cafe{
+  height: 5px;
+  background-color: #9c6141;
+}
+.footer-amarillo{
+  height: 5px;
+  background-color: #ff8000;
+}
+.footer-info{
+  text-align: center;
+}
+/* FIN FOOTER STYLE */
+/* LOGIN FORM STYLE*/
+.contenedor-login-form{
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.text-label{
+  padding: 0;
+  margin: 0;
+}
+.btn-container{
+  padding: 10px 5px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* END LOGIN FORM STYLE*/

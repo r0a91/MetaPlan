@@ -6,36 +6,85 @@
  */
 
 module.exports = {
-  new: function(req, res) {
-    console.log('entre al formulario de crear USUARIO');
-    res.view('usuario/newUsuario');
-  },
-  create: function(req, res) {
-    var obj = {
-      nombre: req.param('nombre'),
-      apellido: req.param('apellido'),
-      nit: req.param('nit'),
-      email: req.param('email'),
-      rol: req.param('rol')
-    }
-    Usuario.create(obj, function(err, ob) {
-      if (err) {
-        console.log(err);
-        res.redirect('createusuario')
-        return;
-      }
-      res.redirect('usuario/showusuario/' + ob.id)
+  mostrarLogin: function (req, res) {
+    res.view('pages/login', {
+      layout:'layouts/publicLayout',
+      error: null
     })
   },
-  showusuario: function(req, res, next) {
-    Usuario.findOne(req.param('id'), function userFounded(err, user) {
-      if (err) {
-        return next(err)
-      }
-      res.view({
-        usuario: user
-      })
-    });
-  }
+  login: function (req, res) {
+    var mensaje = {error:null, datos:null, mensaje:null}
+    var user = null
+    var permisos = []
 
+    var temas = []
+		var autorizado = false
+		async.series([
+			validar,
+			consultarUsuario,
+			compararDatos,
+			generarAutorizacion
+		],finalizar)
+
+    function validar(done) {
+      if (!req.body.correo) mensaje.error="Correo o Password incorrectos";
+      if (!req.body.password) mensaje.error="Correo o Password incorrectos";
+      done()
+    }
+    function consultarUsuario(done) {
+      if (mensaje.error) return done();
+      Usuario.findOne({correo: req.body.correo})
+      .populate('rol')
+      .exec(function (err, userDB) {
+        if (err) {
+          mensaje.error = "Correo o Password incorrectos"
+          return done()
+        }
+        if (!userDB) {
+          mensaje.error = "Correo o Password incorrectos"
+          return done()
+        }
+        user=userDB
+        done()
+      })
+    }
+    function compararDatos(done) {
+      if (mensaje.error) return done();
+      if (req.body.correo == user.correo) {
+        if (req.body.password == user.nit) {
+          autorizado = true
+        }else {
+          mensaje.error = "Correo o Password incorrectos"
+        }
+
+      }else {
+        mensaje.error = "Correo o Password incorrectos"
+      }
+      done()
+    }
+    function generarAutorizacion(done) {
+      if (mensaje.error) return done();
+      req.session.regenerate(function(){
+				req.session.me = user.id
+				req.session.authenticated = autorizado
+				done()
+			})
+    }
+    function finalizar() {
+      if (mensaje.error) {
+        res.view('pages/login', {
+					layout: 'layouts/publicLayout',
+					error: mensaje.error
+				})
+      }else {
+        if (user.rol.nombre=="Docente") {
+          res.redirect('/showdocente')
+        }else if (user.rol.nombre=="Coordinador") {
+          res.redirect('/showcoordinador')
+        }else {
+          res.redirect('/showadministrador')
+        }
+      }
+    }
+  }
 };
