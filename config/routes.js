@@ -31,12 +31,33 @@ module.exports.routes = {
    * `assets` directory)                                                      *
    *                                                                          *
    ***************************************************************************/
-
+   /*Public views */
   'get /': {
     view: 'pages/homepage'
   },
-  'get /login':{view: 'pages/login' },
+  'get /login':'UsuarioController.mostrarLogin',
   'post /login': 'UsuarioController.login',
+  /*Administrador routes */
+  'get /showadministrador':'AdministradorController.index',
+  'get /newCurso':'FormsController.newCurso',
+  'get /newNivel':'FormsController.newNivel',
+  'get /newPeriodo':'FormsController.newPeriodo',
+  'get /newPermiso':'FormsController.newPermiso',
+  'get /newRol':'FormsController.newUsuario',
+  'get /newUsuario':'FormsController.newRol',
+  'post /createPermiso': 'FormsController.createPermiso',
+  'post /createPeriodo': 'FormsController.createPeriodo',
+
+
+  /*Docente routes */
+  'get /showdocente':'DocenteController.index',
+
+
+
+
+  /*Coordinador routes */
+  'get /showcoordinador':'CoordinadorController.index',
+
 
 
   /***************************************************************************
