@@ -96,12 +96,16 @@ module.exports = {
 					error: mensaje.error
 				})
       }else {
+        console.log(user.rol.nombre);
         if (user.rol.nombre=="Docente") {
           res.redirect('/showdocente')
         }else if (user.rol.nombre=="Coordinador") {
           res.redirect('/showcoordinador')
-        }else {
+        }else if (user.rol.nombre=="Administrador"){
           res.redirect('/showadministrador')
+        }else{
+          mensaje.error = "Usuario no tiene asignado un rol"
+          res.json(mensaje.error)
         }
       }
     }

@@ -7,6 +7,6 @@
 
 module.exports = {
 	index: function (req, res) {
-		res.send(req.session.me)
+		res.view('docente/index')
 	}
 };
