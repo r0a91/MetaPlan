@@ -6,6 +6,25 @@
  */
 
 module.exports = {
+  create:function (req, res) {
+    var obj = {
+			nombre: req.param('nombre'),
+      apellido: req.param('apellido'),
+      nit: req.param('nit'),
+      correo: req.param('correo'),
+      rol: req.param('rol')
+		}
+
+		Usuario.create(obj , function UsuarioCreated(err, newUsuario) {
+			if (err) {
+				console.log(err);
+				return res.view('forms/usuario', {
+					error : err
+				})
+			}
+			res.json(newUsuario)
+		})
+  },
   mostrarLogin: function (req, res) {
     res.view('pages/login', {
       layout:'layouts/publicLayout',

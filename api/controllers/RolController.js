@@ -10,8 +10,9 @@ module.exports = {
   create: function(req, res) {
     var obj = {
       nombre: req.param('nombre'),
-      permisos: req.param('permisoid')
+      permisos: req.param('permisos')
     }
+    console.log(obj);
 
     Rol.create(obj, function(err, ob) {
       if (err) {

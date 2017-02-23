@@ -1,9 +1,9 @@
-<div class="container" ng-app="AdministradorAPP" ng-controller="PermisoCtrl">
+<div class="container">
   <h1>CREAR PERMISO</h1>
-  <form ng-submit=SubmitPermisoForm()>
+  <form action="/createPermiso" method="post">
 
     <label>Numero de Permiso:</label>
-    <input type="text" name="num_permiso" ng-model="permisoForm.num_permiso">
+    <input type="text" name="num_permiso">
 
     <button type="submit" name="button">Create Permiso</button>
   </form>

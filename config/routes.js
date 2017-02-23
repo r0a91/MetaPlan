@@ -43,10 +43,14 @@ module.exports.routes = {
   'get /newNivel':'FormsController.newNivel',
   'get /newPeriodo':'FormsController.newPeriodo',
   'get /newPermiso':'FormsController.newPermiso',
-  'get /newRol':'FormsController.newUsuario',
-  'get /newUsuario':'FormsController.newRol',
-  'post /createPermiso': 'FormsController.createPermiso',
-  'post /createPeriodo': 'FormsController.createPeriodo',
+  'get /newRol':'FormsController.newRol',
+  'get /newUsuario':'FormsController.newUsuario',
+  'post /createPermiso': 'PermisoController.create',
+  'post /createPeriodo': 'PeriodoController.create',
+  'post /createRol': 'RolController.create',
+  'post /createCurso': 'CursoController.create',
+  'post /createnivel': 'NivelController.create',
+  'post /createusuario': 'UsuarioController.create',
 
 
   /*Docente routes */
