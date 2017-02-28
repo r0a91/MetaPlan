@@ -109,5 +109,28 @@ module.exports = {
         }
       }
     }
+  },
+  logout: function (req, res) {
+    req.session.destroy(function(err) {
+      if (err) {
+        return res.json(err)
+      }
+			res.redirect('/login')
+		});
+  },
+  edit: function (req, res, next) {
+
+  },
+  update: function (req, res, next) {
+
+  },
+  remove: function (req, res, next) {
+
+  },
+  adicionarMalla: function (req, res) {
+
+  },
+  adicionarDocente: function (req, res) {
+
   }
 };

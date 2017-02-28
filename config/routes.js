@@ -37,6 +37,7 @@ module.exports.routes = {
   },
   'get /login':'UsuarioController.mostrarLogin',
   'post /login': 'UsuarioController.login',
+  'get /logout': 'UsuarioController.logout',
   /*Administrador routes */
   'get /showadministrador':'AdministradorController.index',
   'get /newCurso':'FormsController.newCurso',

@@ -7,22 +7,34 @@
 
 module.exports = {
 	newCurso:function (req, res) {
-		res.view('forms/curso')
+		res.view('forms/curso', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newNivel:function (req, res) {
-		res.view('forms/nivel')
+		res.view('forms/nivel', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newPeriodo:function (req, res) {
-		res.view('forms/periodo')
+		res.view('forms/periodo', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newPermiso:function (req, res) {
-		res.view('forms/permiso')
+		res.view('forms/permiso', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newUsuario:function (req, res) {
-		res.view('forms/usuario')
+		res.view('forms/usuario', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newRol: function(req, res) {
-		res.view('forms/rol')
+		res.view('forms/rol', {
+			layout: 'layouts/administradorLayout'
+		})
 	}
 
 
