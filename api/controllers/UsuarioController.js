@@ -119,10 +119,37 @@ module.exports = {
 		});
   },
   edit: function (req, res, next) {
-
+    console.log("Entro a editar usuario");
+    Usuario.findOne(req.param('id'))
+    .exec(function (err, userFounded) {
+      if (err) {
+        return next(err)
+      }
+      if (!userFounded) {
+        return next()
+      }
+      res.view('/usuario/edit', {
+        layout:'layouts/administradorLayout',
+        user:userFounded
+      })
+    })
   },
   update: function (req, res, next) {
-
+    var userObj = {
+      nombre: req.param('nombre'),
+      apellido: req.param('apellido'),
+      nit:req.param('nit'),
+      correo:req.param('correo')
+    }
+    Usuario.update(req.param('id'), userObj, function userUpdate(err, userUpdated) {
+      if (err) {
+        req.session.flash ={
+          error:err
+        }
+        return res.redirect('/showadministrador')
+      }
+      res.redirect('/usuario')
+    })
   },
   remove: function (req, res, next) {
 

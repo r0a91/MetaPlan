@@ -31,21 +31,21 @@
             <td>  <%= docente.correo%> </td>
             <td>
               <form action="/usuario/edit/<%= docente.id %>" method="post">
-                <button type="button" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                   Editar
                 </button>
               </form>
             </td>
             <td>
               <form action="/usuario/remove/<%= docente.id %>" method="post">
-                <button type="button" class="btn btn-danger">
+                <button type="submit" class="btn btn-danger">
                   Eliminar
                 </button>
               </form>
             </td>
             <td>
               <form action="/usuario/adicionarMalla/<%= docente.id %>" method="post">
-                <button type="button" class="btn btn-success">
+                <button type="submit" class="btn btn-success">
                   Adicionar Malla
                 </button>
               </form>

@@ -54,6 +54,7 @@ module.exports.routes = {
   'post /createusuario': 'UsuarioController.create',
 
 
+
   /*Docente routes */
   'get /showdocente':'DocenteController.index',
 
