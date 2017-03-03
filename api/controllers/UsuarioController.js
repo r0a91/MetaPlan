@@ -151,13 +151,19 @@ module.exports = {
       res.redirect('/usuario')
     })
   },
-  remove: function (req, res, next) {
-
+  destroy: function (req, res, next) {
+    Usuario.destroy(req.param('id'), function userDestroyed(err) {
+      if (err) {
+        console.log(err);
+        return next(err)
+      }
+      res.redirect('/showadministrador')
+    })
   },
   adicionarMalla: function (req, res) {
 
   },
   adicionarDocente: function (req, res) {
-
+    
   }
 };
