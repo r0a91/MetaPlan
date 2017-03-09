@@ -7,51 +7,35 @@
 
 module.exports = {
 	newCurso:function (req, res) {
-		res.view('forms/curso')
+		res.view('forms/curso', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newNivel:function (req, res) {
-		res.view('forms/nivel')
+		res.view('forms/nivel', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newPeriodo:function (req, res) {
-		res.view('forms/periodo')
+		res.view('forms/periodo', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newPermiso:function (req, res) {
-		res.view('forms/permiso')
+		res.view('forms/permiso', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newUsuario:function (req, res) {
-		res.view('forms/usuario')
+		res.view('forms/usuario', {
+			layout: 'layouts/administradorLayout'
+		})
 	},
 	newRol: function(req, res) {
-		res.view('forms/rol')
-	},
-	createPermiso: function (req, res) {
-		var obj = {
-			num_permiso: req.param('num_permiso')
-		}
-
-		Permiso.create(obj , function permisoCreated(err, newPermiso) {
-			if (err) {
-				console.log(err);
-				return res.view('forms/permiso', {
-					error : err
-				})
-			}
-			res.view('administrador/index')
-		})
-	},
-	createPeriodo: function (req, res) {
-		var obj = {
-			num_periodo: req.param('num_periodo')
-		}
-
-		Periodo.create(obj , function permisoCreated(err, newPeriodo) {
-			if (err) {
-				console.log(err);
-				return res.view('forms/periodo', {
-					error : err
-				})
-			}
-			res.json(newPeriodo)
+		res.view('forms/rol', {
+			layout: 'layouts/administradorLayout'
 		})
 	}
+
+
 };

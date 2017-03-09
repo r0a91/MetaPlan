@@ -1,16 +1,17 @@
-<div class="container">
+<div class="container" ng-app="AdministradorAPP">
   <h1>CREAR ROL</h1>
-  <form class="rol-form" action="rol/create" method="post">
+  <form action="/createRol" method="post">
 
     <label>Nombre:</label>
-    <input type="text" name="nombre" class="form-control">
+    <input type="text" name="nombre">
 
     <label>Permisos:</label>
-    <div class="permisos">
-      <% _.each(permisos, function (componente) { %>
-        <label><input type="checkbox" name="permisoid" value="<%= componente.id %>"><%= componente.num_permiso %></label>
-        <% }) %>
+    <div class="permisos" ng-controller="ShowPermisosCtrl">
+      <div ng-repeat="permiso in permisos" class="checkbox-inline">
+        <label><input type="checkbox" name="permisos" value="{{permiso.id}}">{{permiso.num_permiso}}</label>
+      </div>
     </div>
+
 
     <input type="submit" name="submitButton" value="CreateRol">
   </form>

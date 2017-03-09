@@ -6,6 +6,25 @@
  */
 
 module.exports = {
+  create:function (req, res) {
+    var obj = {
+			nombre: req.param('nombre'),
+      apellido: req.param('apellido'),
+      nit: req.param('nit'),
+      correo: req.param('correo'),
+      rol: req.param('rol')
+		}
+
+		Usuario.create(obj , function UsuarioCreated(err, newUsuario) {
+			if (err) {
+				console.log(err);
+				return res.view('forms/usuario', {
+					error : err
+				})
+			}
+			res.json(newUsuario)
+		})
+  },
   mostrarLogin: function (req, res) {
     res.view('pages/login', {
       layout:'layouts/publicLayout',
@@ -77,14 +96,74 @@ module.exports = {
 					error: mensaje.error
 				})
       }else {
+        console.log(user.rol.nombre);
         if (user.rol.nombre=="Docente") {
           res.redirect('/showdocente')
         }else if (user.rol.nombre=="Coordinador") {
           res.redirect('/showcoordinador')
-        }else {
+        }else if (user.rol.nombre=="Administrador"){
           res.redirect('/showadministrador')
+        }else{
+          mensaje.error = "Usuario no tiene asignado un rol"
+          res.json(mensaje.error)
         }
       }
     }
+  },
+  logout: function (req, res) {
+    req.session.destroy(function(err) {
+      if (err) {
+        return res.json(err)
+      }
+			res.redirect('/login')
+		});
+  },
+  edit: function (req, res, next) {
+    console.log("Entro a editar usuario");
+    Usuario.findOne(req.param('id'))
+    .exec(function (err, userFounded) {
+      if (err) {
+        return next(err)
+      }
+      if (!userFounded) {
+        return next()
+      }
+      res.view('/usuario/edit', {
+        layout:'layouts/administradorLayout',
+        user:userFounded
+      })
+    })
+  },
+  update: function (req, res, next) {
+    var userObj = {
+      nombre: req.param('nombre'),
+      apellido: req.param('apellido'),
+      nit:req.param('nit'),
+      correo:req.param('correo')
+    }
+    Usuario.update(req.param('id'), userObj, function userUpdate(err, userUpdated) {
+      if (err) {
+        req.session.flash ={
+          error:err
+        }
+        return res.redirect('/showadministrador')
+      }
+      res.redirect('/usuario')
+    })
+  },
+  destroy: function (req, res, next) {
+    Usuario.destroy(req.param('id'), function userDestroyed(err) {
+      if (err) {
+        console.log(err);
+        return next(err)
+      }
+      res.redirect('/showadministrador')
+    })
+  },
+  adicionarMalla: function (req, res) {
+
+  },
+  adicionarDocente: function (req, res) {
+    
   }
 };

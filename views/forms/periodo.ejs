@@ -1,9 +1,9 @@
-<div class="container" ng-app="AdministradorAPP" ng-controller="PeriodoCtrl">
+<div class="container">
   <h1>CREAR PERIODO</h1>
-  <form ng-submit=SubmitPeriodoForm()>
+  <form action="/createPeriodo" method="post">
 
     <label>Numero de Periodo:</label>
-    <input type="text" name="num_periodo" ng-model="periodoForm.num_periodo">
+    <input type="text" name="num_periodo">
 
     <button type="submit" name="button">Create periodo</button>
   </form>

@@ -12,7 +12,8 @@ module.exports = {
       model: 'usuario'
     },
     asignatura: {
-      model: 'asignatura'
+      type: 'string',
+      required:true,
     },
     nivel: {
       model: 'nivel'

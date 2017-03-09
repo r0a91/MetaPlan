@@ -1,0 +1,105 @@
+<div class="container" ng-app="AdministradorAPP">
+  <h1>VISTA ADMINISTRADOR</h1>
+  <h2>Formularios de creacion en la base de datos</h2>
+  <ul>
+    <li><a href="/newRol">Nuevo Rol</a></li>
+    <li><a href="/newCurso">Nuevo CUrso</a></li>
+    <li><a href="/newNivel">Nuevo Nivel</a></li>
+    <li><a href="/newPeriodo">Nuevo periodo</a></li>
+    <li><a href="/newPermiso">Nuevo Permiso</a></li>
+    <li><a href="/newUsuario">Nuevo Usuario</a></li>
+  </ul>
+  <h2>Docentes</h2>
+  <div class="mostrar_docentes">
+    <table class="table table-condensed">
+      <thead class="thead-inverse">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+          <th>Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% _.each(docentes, function (docente) { %>
+        <tr>
+
+            <td> <%= docente.nombre %> </td>
+            <td> <%= docente.apellido%> </td>
+            <td>  <%= docente.correo%> </td>
+            <td>
+              <form action="/usuario/edit/<%= docente.id %>" method="post">
+                <button type="submit" class="btn btn-primary">
+                  Editar
+                </button>
+              </form>
+            </td>
+            <td>
+              <form action="/usuario/destroy/<%= docente.id %>" method="post">
+                <button type="submit" class="btn btn-danger">
+                  Eliminar
+                </button>
+              </form>
+            </td>
+            <td>
+              <form action="/malla/new/<%= docente.id %>" method="post">
+                <button type="submit" class="btn btn-success">
+                  Adicionar Malla
+                </button>
+              </form>
+            </td>
+
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <h2>Coordinadores</h2>
+  <div class="mostrar_coordinadores">
+    <table class="table table-condensed">
+      <thead class="thead-inverse">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+          <th>Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% _.each(coordinadores, function (coordinador) { %>
+        <tr>
+
+            <td> <%= coordinador.nombre %> </td>
+            <td> <%= coordinador.apellido%> </td>
+            <td>  <%= coordinador.correo%> </td>
+            <td>
+              <form action="/usuario/edit/<%= coordinador.id %>" method="post">
+                <button type="button" class="btn btn-primary">
+                  Editar
+                </button>
+              </form>
+            </td>
+            <td>
+              <form action="/usuario/remove/<%= coordinador.id %>" method="post">
+                <button type="button" class="btn btn-danger">
+                  Eliminar
+                </button>
+              </form>
+            </td>
+            <td>
+              <form action="/usuario/adicionarDocente/<%= coordinador.id %>" method="post">
+                <button type="button" class="btn btn-success">
+                  Adicionar Docente
+                </button>
+              </form>
+            </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
