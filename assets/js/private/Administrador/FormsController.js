@@ -27,3 +27,31 @@ angular.module('AdministradorAPP.controllers', [])
   });
 
 }])
+.controller('ShowNivelesCtrl', ['$scope', '$http', function($scope, $http) {
+  console.log("ENTRO A ShowNivelesCtrl");
+  $http({
+    method: 'GET',
+    url: '/nivel'
+  }).then(function successCallback(response) {
+      $scope.niveles = response.data;
+      console.log($scope.niveles);
+    },
+    function errorCallback(response) {
+      console.log(response.statusText);
+  });
+
+}])
+.controller('ShowCursosCtrl', ['$scope', '$http', function($scope, $http) {
+  console.log("ENTRO A ShowCursosCtrl");
+  $http({
+    method: 'GET',
+    url: '/curso'
+  }).then(function successCallback(response) {
+      $scope.cursos = response.data;
+      console.log($scope.cursos);
+    },
+    function errorCallback(response) {
+      console.log(response.statusText);
+  });
+
+}])

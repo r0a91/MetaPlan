@@ -1,0 +1,38 @@
+<div class="container" ng-app="AdministradorAPP">
+  <h1>Nueva Malla</h1>
+
+  <h2>Docente: <%= usuario.nombre%> <%= usuario.apellido%></h2>
+
+  <form action="/malla/create/<%= usuario.id%>" method="post">
+    <div class="row">
+      <label>Nombre de la asignatura:</label>
+      <input type="text" name="asignatura">
+    </div>
+
+    <div class="row">
+      <label>Nivel</label>
+      <div class="niveles" ng-controller="ShowNivelesCtrl">
+        <div ng-repeat="nivel in niveles" class="radio-inline">
+          <label><input type="radio" name="nivel" value="{{nivel.id}}">{{nivel.nombre}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Cursos</label>
+      <div class="niveles" ng-controller="ShowCursosCtrl">
+        <div ng-repeat="curso in cursos" class="checkbox-inline">
+          <label><input type="checkbox" name="cursos" value="{{curso.id}}">{{curso.num_curso}}</label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <button type="submit" class="btn btn-default">
+        Create Malla
+      </button>
+    </div>
+
+  </form>
+</div>
