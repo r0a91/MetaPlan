@@ -14,6 +14,7 @@
     <table class="table table-condensed">
       <thead class="thead-inverse">
         <tr>
+          <th>id</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
@@ -25,30 +26,18 @@
       <tbody>
         <% _.each(docentes, function (docente) { %>
         <tr>
-
+            <td> <%= docente.id %> </td>
             <td> <%= docente.nombre %> </td>
             <td> <%= docente.apellido%> </td>
             <td>  <%= docente.correo%> </td>
             <td>
-              <form action="/usuario/edit/<%= docente.id %>" method="post">
-                <button type="submit" class="btn btn-primary">
-                  Editar
-                </button>
-              </form>
+              <a href="/docente/edit/<%= docente.id %>" class="btn btn-primary">Editar</a>
             </td>
             <td>
-              <form action="/usuario/destroy/<%= docente.id %>" method="post">
-                <button type="submit" class="btn btn-danger">
-                  Eliminar
-                </button>
-              </form>
+              <a href="/usuario/destroy/<%= docente.id %>" class="btn btn-primary">Eliminar</a>
             </td>
             <td>
-              <form action="/malla/new/<%= docente.id %>" method="post">
-                <button type="submit" class="btn btn-success">
-                  Adicionar Malla
-                </button>
-              </form>
+              <a href="/malla/new/<%= docente.id %>" class="btn btn-primary">Nueva Malla</a>
             </td>
 
         </tr>
@@ -61,6 +50,7 @@
     <table class="table table-condensed">
       <thead class="thead-inverse">
         <tr>
+          <th>id</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
@@ -72,7 +62,7 @@
       <tbody>
         <% _.each(coordinadores, function (coordinador) { %>
         <tr>
-
+            <td> <%= coordinador.id %> </td>
             <td> <%= coordinador.nombre %> </td>
             <td> <%= coordinador.apellido%> </td>
             <td>  <%= coordinador.correo%> </td>

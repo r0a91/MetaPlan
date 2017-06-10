@@ -13,6 +13,8 @@ module.exports = {
 		var coordinadoresDB=[]
 		var administradoresDB=[]
 
+		console.log(req.session.me);
+
 		async.series([
 			consultarRoles,
 			dividirUsuarios

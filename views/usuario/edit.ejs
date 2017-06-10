@@ -1,4 +1,5 @@
 <div class="container" ng-app="AdministradorAPP">
+
   <form class="" action="/usuario/update/<%=user.id%>" method="post">
     <label>Nombre</label>
     <input type="text" name="nombre" class="form-control" value="<%=user.nombre%>">
@@ -13,6 +14,9 @@
       <div ng-repeat="rol in roles">
         <label><input type="radio" name="rol" value="{{rol.id}}">{{rol.nombre}}</label>
       </div>
+    </div>
+    <div class="mallas">
+      <label>mallas</label>
     </div>
     <input type="submit" name="submitButton" value="Update Usuario">
   </form>

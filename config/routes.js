@@ -52,11 +52,13 @@ module.exports.routes = {
   'post /createCurso': 'CursoController.create',
   'post /createnivel': 'NivelController.create',
   'post /createusuario': 'UsuarioController.create',
+  'post /malla/new': 'MallaController.new',
 
 
 
   /*Docente routes */
   'get /showdocente':'DocenteController.index',
+  'get /docente/edit' : 'DocenteController.edit',
 
 
 

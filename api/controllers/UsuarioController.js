@@ -152,18 +152,44 @@ module.exports = {
     })
   },
   destroy: function (req, res, next) {
-    Usuario.destroy(req.param('id'), function userDestroyed(err) {
-      if (err) {
-        console.log(err);
-        return next(err)
-      }
-      res.redirect('/showadministrador')
-    })
+
+    async.series([
+			destruirMallas,
+			destruirDocentesAsignados,
+		],finalizar)
+
+    function destruirMallas(done) {
+      Malla.destroy({docente : req.param('id')}, function (err) {
+        if (err) {
+          return done()
+        }
+        done()
+      })
+    }
+
+    function destruirDocentesAsignados(done) {
+      Usuario.destroy({profesores_a_cargo: req.param('id')}, function (err) {
+        if (err) {
+          return done()
+        }
+        done()
+      })
+    }
+
+    function finalizar() {
+      Usuario.destroy(req.param('id'), function userDestroyed(err) {
+        if (err) {
+          console.log(err);
+          return next(err)
+        }
+        res.redirect('/showadministrador')
+      })
+    }
   },
   adicionarMalla: function (req, res) {
 
   },
   adicionarDocente: function (req, res) {
-    
+
   }
 };
