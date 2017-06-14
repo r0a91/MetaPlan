@@ -17,7 +17,6 @@ module.exports = {
 
 		Usuario.create(obj , function UsuarioCreated(err, newUsuario) {
 			if (err) {
-				console.log(err);
 				return res.view('forms/usuario', {
 					error : err
 				})
@@ -96,7 +95,6 @@ module.exports = {
 					error: mensaje.error
 				})
       }else {
-        console.log(user.rol.nombre);
         if (user.rol.nombre=="Docente") {
           res.redirect('/showdocente')
         }else if (user.rol.nombre=="Coordinador") {
@@ -119,20 +117,56 @@ module.exports = {
 		});
   },
   edit: function (req, res, next) {
-    console.log("Entro a editar usuario");
-    Usuario.findOne(req.param('id'))
-    .exec(function (err, userFounded) {
-      if (err) {
-        return next(err)
-      }
-      if (!userFounded) {
-        return next()
-      }
+
+    var user=null
+    var mallas=[]
+    var profes=[]
+    async.series([
+			consultarUsuario,
+			consultarMallas,
+			consultarProfesoresACargo
+		],finalizar)
+
+    function consultarUsuario(done) {
+      Usuario.findOne(req.param('id'))
+      .exec(function (err, userFounded) {
+        if (err) {
+          return next(err)
+        }
+        if (!userFounded) {
+          return next()
+        }
+        user=userFounded
+      })
+    }
+
+    function consultarMallas(done) {
+      Malla.find({docente:req.param('id')}, function (err, mallasFounded) {
+        if (err) {
+          return done()
+        }
+        mallas=mallasFounded
+        done()
+      })
+    }
+    function consultarProfesoresACargo(done) {
+      Coordinador_Docente.find({id_coordinador:req.param('id')}, function (err, profesFounded) {
+        if (err) {
+          return done()
+        }
+        profes=profesFounded
+        done()
+      })
+    }
+    function finalizar() {
       res.view('/usuario/edit', {
         layout:'layouts/administradorLayout',
-        user:userFounded
+        user:userFounded,
+        mallas:mallas,
+        profes:profes
       })
-    })
+    }
+
   },
   update: function (req, res, next) {
     var userObj = {
@@ -156,6 +190,7 @@ module.exports = {
     async.series([
 			destruirMallas,
 			destruirDocentesAsignados,
+      destruirCoordinadorAsignado
 		],finalizar)
 
     function destruirMallas(done) {
@@ -168,7 +203,15 @@ module.exports = {
     }
 
     function destruirDocentesAsignados(done) {
-      Usuario.destroy({profesores_a_cargo: req.param('id')}, function (err) {
+      Coordinador_Docente.destroy({id_profesor: req.param('id')}, function (err) {
+        if (err) {
+          return done()
+        }
+        done()
+      })
+    }
+    function destruirCoordinadorAsignado(done) {
+      Coordinador_Docente.destroy({id_coordinador: req.param('id')}, function (err) {
         if (err) {
           return done()
         }
@@ -179,7 +222,6 @@ module.exports = {
     function finalizar() {
       Usuario.destroy(req.param('id'), function userDestroyed(err) {
         if (err) {
-          console.log(err);
           return next(err)
         }
         res.redirect('/showadministrador')

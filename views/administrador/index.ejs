@@ -67,25 +67,13 @@
             <td> <%= coordinador.apellido%> </td>
             <td>  <%= coordinador.correo%> </td>
             <td>
-              <form action="/usuario/edit/<%= coordinador.id %>" method="post">
-                <button type="button" class="btn btn-primary">
-                  Editar
-                </button>
-              </form>
+              <a href="/coordinador/edit/<%= coordinador.id %>" class="btn btn-primary">Editar</a>
             </td>
             <td>
-              <form action="/usuario/remove/<%= coordinador.id %>" method="post">
-                <button type="button" class="btn btn-danger">
-                  Eliminar
-                </button>
-              </form>
+              <a href="/usuario/destroy/<%= coordinador.id %>" class="btn btn-primary">Eliminar</a>
             </td>
             <td>
-              <form action="/usuario/adicionarDocente/<%= coordinador.id %>" method="post">
-                <button type="button" class="btn btn-success">
-                  Adicionar Docente
-                </button>
-              </form>
+              <a href="/coordinador/agregar/<%= coordinador.id %>" class="btn btn-primary">Agregar Docente</a>
             </td>
         </tr>
         <% }) %>

@@ -57,17 +57,13 @@ module.exports = {
 
 	},
 	edit: function (req, res, next) {
-		console.log(req.param('id'));
 		Usuario.findOne(req.param('id'), function userFounded(err, user) {
 			if (err) {
-				console.log(err);
 				return next(err)
 			}
 			if(!user){
-				console.log("Usuario no encontrado");
 				return next()
 			}
-			console.log(user);
 			res.view('usuario/edit', {
 				layout: 'layouts/administradorLayout',
 				user: user

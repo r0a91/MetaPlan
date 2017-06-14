@@ -65,7 +65,9 @@ module.exports.routes = {
 
   /*Coordinador routes */
   'get /showcoordinador':'CoordinadorController.index',
-
+  'get /coordinador/edit': 'CoordinadorController.edit',
+  'get /coordinador/agregar': 'CoordinadorController.agregar',
+  'post /coordinador/agregardocentes': 'CoordinadorController.agregardocentes',
 
 
   /***************************************************************************
