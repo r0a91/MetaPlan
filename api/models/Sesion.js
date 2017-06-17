@@ -20,6 +20,12 @@ module.exports = {
     },
     fecha: {
       type: 'date'
+    },
+    curso: {
+      model:'curso'
+    },
+    nivel:{
+      nivel:'nivel'
     }
   }
 };

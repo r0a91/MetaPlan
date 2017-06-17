@@ -1,14 +1,40 @@
-angular.module('AdministradorAPP.controllers', []).controller('SesionCtrl', ['$scope', function($scope) {
+angular.module('AdministradorAPP.controllers', [])
+.controller('SesionCtrl', ['$scope', function($scope) {
   var sesiones = $scope.sesiones = [];
+  var numsesiones = $scope.numsesiones =[]
+  var descripciones = $scope.descripciones =[]
+  var cursosSesiones = $scope.cursosSesiones =[]
+  var fechasSesiones = $scope.fechasSesiones =[]
 
-  $scope.addSesion = function(num, desc, date) {
+  $scope.addSesion = function(desc) {
+    var curso=[]
+    $(".cursostext").each(function() {
+      curso.push($(this).val());
+    });
+
+    var fechas=[]
+
+    $(".fechascursos").each(function() {
+      fechas.push($(this).val());
+    });
+
+    var num=[]
+    num.push(sesiones.length +1)
+
+    var d=[desc]
+
     var ses = {
-      num_sesion: num,
-      descripcion: desc,
-      fecha: date
+      num_sesion:num,
+      descripcion: d,
+      cursosesion: curso,
+      fechasesion: fechas
     }
+    numsesiones.push(num)
+    descripciones.push(d)
+    cursosSesiones.push(curso)
+    fechasSesiones.push(fechas)
     sesiones.push(ses)
-    console.log(ses);
+    console.log(ses.num_sesion);
   };
 }]).controller('CursoCtrl', ['$scope', '$http', function($scope, $http) {
   $http({

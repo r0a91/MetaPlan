@@ -73,5 +73,7 @@ table, th , td {
   margin-bottom: 30px;
   text-align: center;
 }
-
+li{
+  display: inline;
+}
 /* END LOGIN FORM STYLE*/

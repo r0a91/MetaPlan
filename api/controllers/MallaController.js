@@ -10,13 +10,11 @@ module.exports = {
 		var usuarioDB = null
 		var nivelesDB =[]
 		var cursosDB = []
-		var periodosDB = []
 
 		async.series([
 			consultarUsuario,
 			consultarNiveles,
 			consultarCursos,
-			consultarPeriodos
 		],finalizar)
 
 		function consultarUsuario(done) {
@@ -67,74 +65,32 @@ module.exports = {
 		}
 
 
-		function consultarPeriodos(done) {
-			Periodo.find()
-			.exec(function (err, periodosFounded) {
-				if (err) {
-					return res.json(err)
-				}
-				if (!periodosFounded) {
-					return res.json("Periodos no encontrados")
-				}
-				for (var i = 0; i < periodosFounded.length; i++) {
-					periodosDB.push(periodosFounded[i])
-				}
-				done()
-			})
-		}
-
-
 		function finalizar() {
 			res.view('forms/malla', {
 				layout: 'layouts/administradorLayout',
 				usuario:usuarioDB,
 				niveles:nivelesDB,
-				cursos: cursosDB,
-				periodos: periodosDB
+				cursos: cursosDB
 			})
 		}
 	},
 	create:function (req, res) {
-		console.log("ENtro a create malla");
 
 		var mensaje = {error:null, datos:null, mensaje:null}
-    var per = []
-
-		async.series([
-			consultarPeriodos,
-		],finalizar)
-
-		function consultarPeriodos(done) {
-			Periodo.find()
-			.exec(function (err, periodosDB) {
-				if (err) {
-					mensaje.error="Problemas al consultar Periodos"
-					return done()
-				}
-				for (var i = 0; i < periodosDB.length; i++) {
-					per.push(periodosDB[i])
-				}
-				done()
-			})
+		mallaobj={
+			docente:req.param('id'),
+			asignatura:req.param('asignatura'),
+			nivel:req.param('nivel'),
+			cursos:req.param('cursos'),
+			logros:[]
 		}
 
-		function finalizar() {
-			mallaobj={
-				docente:req.param('id'),
-				asignatura:req.param('asignatura'),
-				nivel:req.param('nivel'),
-				cursos:req.param('cursos'),
-				periodos:per
+		Malla.create(mallaobj, function mallaCreated(err, NewMalla) {
+			if (err) {
+				mensaje.error="Problemas la crear Mallas"
+				return res.json(mensaje.error)
 			}
-			console.log(req.param('cursos'));
-
-			Malla.create(mallaobj, function mallaCreated(err, NewMalla) {
-				if (err) {
-					mensaje.error="Problemas la crear Mallas"
-					return res.json(mensaje.error)
-				}
-				res.redirect('/showadministrador')
-			})
-		}
+			res.redirect('/showadministrador')
+		})
 	}
 };

@@ -8,8 +8,8 @@
 module.exports = {
 
   attributes: {
-    periodo: {
-      model: 'periodo'
+    malla: {
+      model:'malla'
     },
     num_logro: {
       type: 'integer'
@@ -40,6 +40,9 @@ module.exports = {
       type: 'string'
     },
     observacion_docente: {
+      type: 'string'
+    },
+    periodo:{
       type: 'string'
     }
   }

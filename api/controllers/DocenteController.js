@@ -33,6 +33,9 @@ module.exports = {
 		}
 		function consultarMallas(done) {
 			Malla.find({docente:req.session.me})
+			.populate('nivel')
+			.populate('cursos')
+			.populate('logros')
 			.exec(function mallasFounded(err, mallasFounded ){
 
 				if (err) {

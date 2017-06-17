@@ -1,2 +1,71 @@
-<h1>VISTA DOCENTE</h1>
-<h2><%= docente.nombre%> <%= docente.apellido%></h2>
+<div class="container">
+  <h1>VISTA DOCENTE</h1>
+  <h2><%= docente.nombre%> <%= docente.apellido%></h2>
+
+  <div class="Asignaturas">
+      <h2>Asignaturas</h2>
+
+      <% _.each(mallas, function (malla) { %>
+
+        <h3>Materia: <%= malla.asignatura %></h3>
+
+        <h3>Nivel:</h3>
+        <ul class="nivel">
+          <li><%= malla.nivel.nombre %></li>
+        </ul>
+
+        <h3>Cursos</h3>
+        <ul class="cursos">
+          <% for(var i=0; i<malla.cursos.length; i++) {%>
+            <li><%= malla.cursos[i].num_curso %></li>
+          <% } %>
+        </ul>
+
+
+
+        <table class="table table-condensed">
+          <thead class="thead-inverse">
+            <tr>
+              <th>Primer Periodo</th>
+              <th>Segundo Periodo</th>
+              <th>Tercer Periodo</th>
+              <th>Cuarto Periodo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i=0; i<malla.logros.length; i++) {%>
+              <tr>
+                <% if(malla.logros[i].periodo == "01"){  %>
+                <th><%= malla.logros[i].objetivo_general %></th>
+                <% } %>
+
+                <% if(malla.logros[i].periodo == "02"){  %>
+                <th><%= malla.logros[i].objetivo_general %></th>
+                <% } %>
+
+                <% if(malla.logros[i].periodo == "03"){  %>
+                <th><%= malla.logros[i].objetivo_general %></th>
+                <% } %>
+
+                <% if(malla.logros[i].periodo == "04"){  %>
+                <th><%= malla.logros[i].objetivo_general %></th>
+                <% } %>
+
+              </tr>
+            <% } %>
+            <tr>
+              <th><a href="/logro/new?id=<%= malla.id %>&periodo=01" class="btn btn-primary">+</a></th>
+              <th><a href="/logro/new?id=<%= malla.id %>&periodo=02" class="btn btn-primary">+</a></th>
+              <th><a href="/logro/new?id=<%= malla.id %>&periodo=03" class="btn btn-primary">+</a></th>
+              <th><a href="/logro/new?id=<%= malla.id %>&periodo=04" class="btn btn-primary">+</a></th>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+      <% }) %>
+  </div>
+
+
+</div>
