@@ -41,5 +41,109 @@ module.exports = {
       })
     }
 
+  },
+  create: function functionName(req, res, next) {
+    console.log("ENTRO A CREATE LOGRO");
+    var datosLogro={
+      malla:req.param('mallaID'),
+      num_logro:req.param('num_logro'),
+      objetivo_general:req.param('objetivo_general'),
+      referentes_teoricos:req.param('referentes_teoricos'),
+      fecha_inicio:req.param('fecha_inicio'),
+      fecha_final:req.param('fecha_final'),
+      recursos:req.param('recursos'),
+      evaluacion: req.param('evaluacion'),
+      observacion_docente: req.param('observacion_docente'),
+      periodo: req.param('periodo')
+    }
+
+    var logroID=""
+
+
+    async.series([
+      crearLogro,
+      prepararDatosSesion,
+      crearSesiones
+    ],finalizar)
+
+
+
+    function crearLogro(done) {
+      Logro.create(datosLogro).exec(function (err, logroCreated) {
+        if (err) {
+          return done(err)
+        }
+        logroID=logroCreated.id
+        done()
+      })
+      console.log(datosLogro);
+
+    }
+
+    function prepararDatosSesion(done) {
+      Malla.findOne({id: req.param('mallaID')})
+      .exec(function (err, mallaFounded) {
+        if (err) {
+          return done()
+        }
+        var datosSesiones={
+          num_sesion:req.param('num_sesion'),
+          logro:logroID,
+          descripcion:req.param('descripcion'),
+          fechas:req.param('fecha'),
+          cursos:mallaFounded.curso,
+          nivel:mallaFounded.nivel
+        }
+        done(datosSesiones)
+      })
+    }
+
+
+    function crearSesiones(datosSesiones, done) {
+
+      var sesiones=[]
+      var num_sesiones=[]
+      var logros=[]
+      var descripciones=[]
+      var fechas=datosSesiones.fechas
+      var cursos=[]
+      var niveles=[]
+
+      for (var i = 0; i < datosSesiones.num_sesion.length; i++) {
+        for (var j = 0; j < datosSesiones.cursos.length; j++) {
+          num_sesiones.push(datosSesiones.num_sesion[i])
+          logros.push(datosSesiones.logro)
+          descripciones.push(datosSesiones.descripcion[i])
+          cursos.push(datosSesiones.cursos[j])
+          niveles.push(datosSesiones.nivel)
+        }
+      }
+      for (var i = 0; i < fechas.length; i++) {
+        var sesion={
+          num_sesion:num_sesiones[i],
+          logro:logros[i],
+          descripcion:descripciones[i],
+          fecha:fechas[i],
+          curso:cursos[i],
+          nivel:niveles[i]
+        }
+        console.log("Sesion");
+        console.log(sesion);
+        sesiones.push(sesion)
+      }
+      for (var i = 0; i < sesiones.length; i++) {
+        Sesion.create(sesiones[i]).exec(function (err, sesionCreated) {
+          if (err) {
+            return done()
+          }
+        })
+      }
+
+      console.log("Sesiones creadas");
+      done()
+    }
+    function finalizar() {
+      res.redirect('showdocente')
+    }
   }
 };

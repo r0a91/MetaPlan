@@ -21,7 +21,11 @@
           <% } %>
         </ul>
 
-
+        <div >
+          <% for(var i=0; i<malla.logros.length; i++) {%>
+            <h2><%= malla.logros[i].periodo%></h2>
+          <% } %>
+        </div>
 
         <table class="table table-condensed">
           <thead class="thead-inverse">
@@ -35,20 +39,20 @@
           <tbody>
             <% for(var i=0; i<malla.logros.length; i++) {%>
               <tr>
-                <% if(malla.logros[i].periodo == "01"){  %>
-                <th><%= malla.logros[i].objetivo_general %></th>
+                <% if(malla.logros[i].periodo === "01"){  %>
+                <td><%= malla.logros[i].objetivo_general %></td>
                 <% } %>
 
-                <% if(malla.logros[i].periodo == "02"){  %>
-                <th><%= malla.logros[i].objetivo_general %></th>
+                <% if(malla.logros[i].periodo === "02"){  %>
+                <td><%= malla.logros[i].objetivo_general %></td>
                 <% } %>
 
-                <% if(malla.logros[i].periodo == "03"){  %>
-                <th><%= malla.logros[i].objetivo_general %></th>
+                <% if(malla.logros[i].periodo === "03"){  %>
+                <td><%= malla.logros[i].objetivo_general %></td>
                 <% } %>
 
-                <% if(malla.logros[i].periodo == "04"){  %>
-                <th><%= malla.logros[i].objetivo_general %></th>
+                <% if(malla.logros[i].periodo === "04"){  %>
+                <td><%= malla.logros[i].objetivo_general %></td>
                 <% } %>
 
               </tr>

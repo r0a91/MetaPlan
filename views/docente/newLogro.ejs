@@ -1,15 +1,21 @@
 <div class="container" ng-app="AdministradorAPP" ng-controller="SesionCtrl">
   <h1>CREAR LOGRO</h1>
 
-    <form class="curso-form" action="/logro/create/malla.id" ng-controller="LogroCtrl">
+    <form class="curso-form" action="/createlogro" method="post">
+
+      <h2>Materia: <%= malla.asignatura %></h2>
+      <h3>nivel: <%= malla.nivel.nombre%></h3>
+      <input type="text" name="mallaID" value="<%= malla.id%>" hidden>
 
       <div class="form-group">
         <label>Fecha Inicio:</label>
-        <input type="date" name="fecha_inicio" ng-model="logro.fecha_inicio">
+        <input type="date" name="fecha_inicio">
         <label>Fecha final:</label>
-        <input type="date" name="fecha_final" ng-model="logro.fecha_final">
+        <input type="date" name="fecha_final">
         <label>Periodo</label>
-        <input type="text" name="periodo" value="<%= periodo %>" disabled>
+        <input type="text" name="periodo" value="<%= periodo %>">
+        <label>Numero de Logro</label>
+        <input type="number" name="num_logro">
       </div>
 
 
@@ -79,7 +85,7 @@
              </ul>
            </td>
            <td>
-             <ul ng-repeat="fs in s.fechasesion" >
+             <ul ng-repeat="fs in s.fechasesion track by $index" >
                <li><input type="text" name="fecha" value="{{fs}}"></li>
              </ul>
            </td>
@@ -91,17 +97,17 @@
 
       <div class="last-panel row">
         <label>Recursos</label>
-        <input type="text" name="rec" ng-model="logro.recursos" class="form-control">
+        <input type="text" name="recursos" class="form-control">
 
         <label>Evaluacion para los estudiantes</label>
-        <input type="text" name="eva" ng-model="evaluacion" class="form-control">
+        <input type="text" name="evaluacion" class="form-control">
 
         <label>observacion_docente</label>
-        <input type="text" name="obs" ng-model="observacion_docente" class="form-control">
+        <input type="text" name="observacion_docente" class="form-control">
 
       </div>
 
-      <input type="submit" name="submitButton" value="CrearLogro" class="btn btn-primary col-sm-offset-5 col-sm-1">
+      <input type="submit" name="submitButton" value="Crear Logro" class="btn btn-primary col-sm-offset-5 col-sm-1">
     </form>
 
   </div>

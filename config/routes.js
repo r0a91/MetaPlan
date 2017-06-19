@@ -57,7 +57,7 @@ module.exports.routes = {
   /*Docente routes */
   'get /showdocente':'DocenteController.index',
   'get /docente/edit' : 'DocenteController.edit',
-
+  'post /createlogro': 'LogroController.create',
 
 
 

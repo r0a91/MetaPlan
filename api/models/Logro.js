@@ -23,7 +23,7 @@ module.exports = {
     numero_sesiones: {
       type: 'integer'
     },
-    sesion: {
+    sesiones: {
       collection: 'sesion',
       via: 'logro'
     },
