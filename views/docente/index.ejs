@@ -21,12 +21,6 @@
           <% } %>
         </ul>
 
-        <div >
-          <% for(var i=0; i<malla.logros.length; i++) {%>
-            <h2><%= malla.logros[i].periodo%></h2>
-          <% } %>
-        </div>
-
         <table class="table table-condensed">
           <thead class="thead-inverse">
             <tr>
@@ -37,26 +31,47 @@
             </tr>
           </thead>
           <tbody>
-            <% for(var i=0; i<malla.logros.length; i++) {%>
+
               <tr>
-                <% if(malla.logros[i].periodo === "01"){  %>
-                <td><%= malla.logros[i].objetivo_general %></td>
-                <% } %>
 
-                <% if(malla.logros[i].periodo === "02"){  %>
-                <td><%= malla.logros[i].objetivo_general %></td>
-                <% } %>
-
-                <% if(malla.logros[i].periodo === "03"){  %>
-                <td><%= malla.logros[i].objetivo_general %></td>
-                <% } %>
-
-                <% if(malla.logros[i].periodo === "04"){  %>
-                <td><%= malla.logros[i].objetivo_general %></td>
-                <% } %>
-
+                  <td>
+                    <% for(var i=0; i<malla.logros.length; i++) {%>
+                      <ul>
+                        <% if(malla.logros[i].periodo === "01"){  %>
+                        <li><a href="#"><%= malla.logros[i].objetivo_general %></a></li>
+                        <% } %>
+                      </ul>
+                    <% } %>
+                  </td>
+                  <td>
+                    <% for(var i=0; i<malla.logros.length; i++) {%>
+                      <ul>
+                        <% if(malla.logros[i].periodo === "02"){  %>
+                        <li><a href="#"><%= malla.logros[i].objetivo_general %></a></li>
+                        <% } %>
+                      </ul>
+                    <% } %>
+                  </td>
+                  <td>
+                    <% for(var i=0; i<malla.logros.length; i++) {%>
+                      <ul>
+                        <% if(malla.logros[i].periodo === "03"){  %>
+                        <li><a href="#"><%= malla.logros[i].objetivo_general %></a></li>
+                        <% } %>
+                      </ul>
+                    <% } %>
+                  </td>
+                  <td>
+                    <% for(var i=0; i<malla.logros.length; i++) {%>
+                      <ul>
+                        <% if(malla.logros[i].periodo === "04"){  %>
+                        <li><a href="#"><%= malla.logros[i].objetivo_general %></a></li>
+                        <% } %>
+                      </ul>
+                    <% } %>
+                  </td>
               </tr>
-            <% } %>
+
             <tr>
               <th><a href="/logro/new?id=<%= malla.id %>&periodo=01" class="btn btn-primary">+</a></th>
               <th><a href="/logro/new?id=<%= malla.id %>&periodo=02" class="btn btn-primary">+</a></th>
