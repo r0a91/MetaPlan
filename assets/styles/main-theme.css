@@ -76,4 +76,33 @@ table, th , td {
 li{
   display: inline;
 }
+.div_curso_fecha{
+  display: inline;
+}
+.ul_curso_fecha{
+  display: inline;
+}
+.div_tema{
+  margin: 25px 0;
+}
+.div_desplegables{
+  margin: 25px 0;
+}
+.div_curso_fecha{
+  margin: 25px 0;
+}
+.boton_agregar_sesion{
+  margin-bottom: 25px;
+  background-color: #9c6141;
+  text-align: center;
+}
+.agregar_sesion{
+  background: white;
+  background-color: #9c6141;
+  text-align: center;
+  color: white;
+}
+.panel_observaciones_logros{
+  margin: 25px 0;
+}
 /* END LOGIN FORM STYLE*/

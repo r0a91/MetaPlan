@@ -33,9 +33,6 @@ module.exports = {
     fecha_final: {
       type: 'date'
     },
-    recursos: {
-      type: 'string'
-    },
     evaluacion: {
       type: 'string'
     },

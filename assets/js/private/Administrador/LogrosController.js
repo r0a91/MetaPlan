@@ -1,12 +1,19 @@
 angular.module('AdministradorAPP.controllers', [])
 .controller('SesionCtrl', ['$scope', function($scope) {
   var sesiones = $scope.sesiones = [];
+
   var numsesiones = $scope.numsesiones =[]
-  var descripciones = $scope.descripciones =[]
+
+  var temas = $scope.temas = [];
+  var etapas = $scope.etapas = [];
+  var tecnicas = $scope.tecnicas = [];
+  var recursos = $scope.recursos = [];
+  var descripciones = $scope.descripciones = [];
+
   var cursosSesiones = $scope.cursosSesiones =[]
   var fechasSesiones = $scope.fechasSesiones =[]
 
-  $scope.addSesion = function(desc) {
+  $scope.addSesion = function(tem, eta, tec, rec, desc) {
     var curso=[]
     $(".cursostext").each(function() {
       curso.push($(this).val());
@@ -18,23 +25,21 @@ angular.module('AdministradorAPP.controllers', [])
       fechas.push($(this).val());
     });
 
-    var num=[]
-    num.push(sesiones.length +1)
-
-    var d=[desc]
+    var num = sesiones.length +1
 
     var ses = {
-      num_sesion:num,
-      descripcion: d,
+      num_sesion : num,
+      tema: tem,
+      etapa_del_modelo:eta,
+      tecnica_de_ensenanza:tec,
+      recursos:rec,
+      descripcion_de_la_actividad:desc,
       cursosesion: curso,
       fechasesion: fechas
     }
-    numsesiones.push(num)
-    descripciones.push(d)
-    cursosSesiones.push(curso)
-    fechasSesiones.push(fechas)
+
     sesiones.push(ses)
-    console.log(ses.num_sesion);
+    console.log(ses);
   };
 }]).controller('CursoCtrl', ['$scope', '$http', function($scope, $http) {
   $http({
