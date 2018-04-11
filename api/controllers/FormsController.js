@@ -16,11 +16,6 @@ module.exports = {
 			layout: 'layouts/administradorLayout'
 		})
 	},
-	newPeriodo:function (req, res) {
-		res.view('forms/periodo', {
-			layout: 'layouts/administradorLayout'
-		})
-	},
 	newPermiso:function (req, res) {
 		res.view('forms/permiso', {
 			layout: 'layouts/administradorLayout'

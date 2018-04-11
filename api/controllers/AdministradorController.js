@@ -13,6 +13,8 @@ module.exports = {
 		var coordinadoresDB=[]
 		var administradoresDB=[]
 
+		console.log(req.session.me);
+
 		async.series([
 			consultarRoles,
 			dividirUsuarios
@@ -40,22 +42,19 @@ module.exports = {
 			for (var i = 0; i < roles.length; i++) {
 				if (roles[i].nombre=="Docente") {
 					docentesDB=roles[i].usuarios
-					console.log("DOCENTES");
-					console.log(roles[i].usuarios);
+
 				}else if (roles[i].nombre=="Coordinador") {
 					coordinadoresDB=roles[i].usuarios
-					console.log("COORDINADORES");
-					console.log(roles[i].usuarios);
+
 				}else {
 					administradoresDB=roles[i].usuarios
-					console.log("ADMINISTRADORES");
-					console.log(roles[i].usuarios);
+
 				}
 			}
 			done()
 		}
 		function finalizar() {
-			console.log("FINALIZAR");
+
 			res.view('administrador/index',{
 				layout:'layouts/administradorLayout',
 				docentes: docentesDB,

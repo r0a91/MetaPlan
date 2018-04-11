@@ -33,6 +33,9 @@ module.exports = {
 		}
 		function consultarMallas(done) {
 			Malla.find({docente:req.session.me})
+			.populate('nivel')
+			.populate('cursos')
+			.populate('logros')
 			.exec(function mallasFounded(err, mallasFounded ){
 
 				if (err) {
@@ -54,6 +57,21 @@ module.exports = {
 			})
 		}
 
+
+	},
+	edit: function (req, res, next) {
+		Usuario.findOne(req.param('id'), function userFounded(err, user) {
+			if (err) {
+				return next(err)
+			}
+			if(!user){
+				return next()
+			}
+			res.view('usuario/edit', {
+				layout: 'layouts/administradorLayout',
+				user: user
+			})
+		})
 
 	}
 };

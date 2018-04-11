@@ -8,8 +8,8 @@
 module.exports = {
 
   attributes: {
-    periodo: {
-      model: 'periodo'
+    malla: {
+      model:'malla'
     },
     num_logro: {
       type: 'integer'
@@ -23,7 +23,7 @@ module.exports = {
     numero_sesiones: {
       type: 'integer'
     },
-    sesion: {
+    sesiones: {
       collection: 'sesion',
       via: 'logro'
     },
@@ -33,13 +33,13 @@ module.exports = {
     fecha_final: {
       type: 'date'
     },
-    recursos: {
-      type: 'string'
-    },
     evaluacion: {
       type: 'string'
     },
     observacion_docente: {
+      type: 'string'
+    },
+    periodo:{
       type: 'string'
     }
   }

@@ -23,10 +23,9 @@ module.exports = {
       via: 'malla',
       through: 'malla_curso'
     },
-    periodos: {
-      collection: 'periodo',
-      via: 'malla',
-      through: 'malla_periodo'
+    logros: {
+      collection: 'logro',
+      via: 'malla'
     }
   }
 };

@@ -1,74 +1,197 @@
-<div class="container" ng-controller="SesionCtrl">
+<div class="container" ng-app="AdministradorAPP" ng-controller="SesionCtrl">
   <h1>CREAR LOGRO</h1>
-  <form class="curso-form" ng-submit="logroCreate()" ng-controller="LogroCtrl">
 
-    <div class="form-group">
-      <label>Fecha Inicio:</label>
-      <input type="date" name="fecha_inicio" ng-model="logro.fecha_inicio">
-      <label>Fecha final:</label>
-      <input type="date" name="fecha_final" ng-model="logro.fecha_final">
-    </div>
+    <form class="curso-form" action="/createlogro" method="post">
 
-    <div class="form-group">
-      <label for="comment">Objetivo general de aprendizaje:</label>
-      <input type="text" class="form-control" ng-model="logro.objetivo_general">
-    </div>
+      <h2>Materia: <%= malla.asignatura %></h2>
+      <h3>nivel: <%= malla.nivel.nombre%></h3>
+      <input type="text" name="mallaID" value="<%= malla.id%>" hidden>
 
-    <div class="form-group">
-      <label for="referentes_teoricos">Referentes Teoricos:</label>
-      <textarea class="form-control" rows="5" ng-model="logro.referentes_teoricos"></textarea>
-    </div>
-
-    <div class="sesiones-panel row">
-      <div class="col-sm-2">
-        <label>Num Sesion</label>
-        <input type="text" name="num-sesion" ng-model="num_sesion" class="form-control">
+      <div class="form-group">
+        <label>Fecha Inicio:</label>
+        <input type="date" name="fecha_inicio">
+        <label>Fecha final:</label>
+        <input type="date" name="fecha_final">
+        <label>Periodo</label>
+        <input type="text" name="periodo" value="<%= periodo %>">
+        <label>Numero de Logro</label>
+        <input type="number" name="num_logro">
       </div>
 
-      <div class="col-sm-6">
-        <label>Descripcion</label>
-        <input type="text" name="desc" ng-model="descripcion" class="form-control">
+
+
+      <div class="form-group">
+        <label for="comment">Objetivo general de aprendizaje:</label>
+        <input type="text" class="form-control" name="objetivo_general">
       </div>
 
-      <div class="cursos col-sm-3">
-        <label>Fecha</label>
-        <input type="date" name="date" ng-model="fecha" class="form-control">
+      <div class="form-group">
+        <label for="referentes_teoricos">Referentes Teoricos:</label>
+        <textarea class="form-control" rows="5" name="referentes_teoricos"></textarea>
       </div>
 
-      <button type="button" class="btn btn-default col-sm-1 btn-addses" ng-click="addSesion(num_sesion, descripcion, fecha)">
-        Agregar
-      </button>
+      <h2 class="agregar_sesion">Sesiones</h2>
 
-    </div>
+      <div class="row">
 
-    <div class="row">
-      <table class="col-md-12">
-        <tr>
-          <td>NumeroSesion</td>
-          <td>Descripcion</td>
-          <td>Cursos</td>
-        </tr>
-        <tr ng-repeat="ses in sesiones">
-          <td ng-model="ses.num_sesion">{{ses.num_sesion}}</td>
-          <td ng-model="ses.descripcion">{{ses.descripcion}}</td>
-          <td ng-model="ses.fecha">{{ses.fecha}}</td>
-        </tr>
-      </table>
-    </div>
+        <div class="col-sm-12">
+          <label>Tema: </label>
+          <input type="text" name="sesiondesc" ng-model="tem" class="form-control">
+        </div>
+
+          <div class="div_desplegables col-sm-12">
+            <label>Etapa del modelo: </label>
+            <select name="etapa_del_modelo_s" ng-model="eta">
+              <option value="Activación de conocimientos previos">Activación de conocimientos previos</option>
+              <option value="Acceso a la informacion">Acceso a la informacion</option>
+              <option value="Conceptualización">Conceptualización</option>
+              <option value="Comprensión">Comprensión</option>
+              <option value="Transferencia">Transferencia</option>
+            </select>
+
+            <label>Tecnica de Enseñanza: </label>
+            <select name="tecnica_de_ensenanza_s" ng-model="tec">
+              <option value="Trabajo individual">Trabajo individual</option>
+              <option value="Trabajo en binas">Trabajo en binas</option>
+              <option value="Trabajo en pequeño grupo">Trabajo en pequeño grupo</option>
+              <option value="Trabajo en gran grupo">Trabajo en gran grupo</option>
+            </select>
+
+            <label>Recursos: </label>
+            <select name="recursos_s" ng-model="rec">
+              <option value="Ninguno">Ninguno</option>
+              <option value="Archivo">Archivo</option>
+              <option value="Video">Video</option>
+              <option value="Ebook">Ebook</option>
+              <option value="Video">Video</option>
+              <option value="Presentación Multimedia">Presentación multimedia</option>
+              <option value="Actividad Multimedia">Actividad Multimedia</option>
+              <option value="Galeria">Galeria</option>
+              <option value="Aplicaciones">Aplicaciones</option>
+            </select>
+          </div>
+
+          <div class="col-sm-12">
+            <label>Descripcion de la actividad: </label>
+            <input type="text" name="sesiondesc" ng-model="desc" class="form-control">
+          </div>
+
+          <div class="div_curso_fecha col-sm-12">
+            <% for(var i=0; i<malla.cursos.length; i++) {%>
+              <ul class="ul_curso_fecha row">
+                <li>
+                  <label>Curso: </label><input class="cursostext" type="text" name="cursosesion" value="<%= malla.cursos[i].num_curso %>" disabled>
+                  <label>Fecha: </label><input type="date" name="fechasesioncurso" class="fechascursos">
+                </li>
+              </ul>
+            <% } %>
+          </div>
+            <button type="button" class="boton_agregar_sesion btn btn-warning col-sm-offset-5 col-sm-1" ng-click="addSesion(tem, eta, tec, rec, desc)">
+              Agregar
+            </button>
+      </div>
 
 
-    <div class="last-panel row">
-      <label>Recursos</label>
-      <input type="text" name="rec" ng-model="logro.recursos" class="form-control">
 
-      <label>Evaluacion para los estudiantes</label>
-      <input type="text" name="eva" ng-model="evaluacion" class="form-control">
 
-      <label>observacion_docente</label>
-      <input type="text" name="obs" ng-model="observacion_docente" class="form-control">
+      <div class="sesiones_agregadas row" ng-repeat="s in sesiones">
 
-    </div>
+        <div class="container-fluid footer-amarillo"></div>
 
-    <input type="submit" name="submitButton" value="CrearLogro" class="btn btn-primary col-sm-offset-5 col-sm-1">
-  </form>
-</div>
+        <ul>
+          <li class="row">
+            <div class="col-sm-2">
+                <h3 class="text-label"><span class="label label-warning">Sesion N#</span></h3>
+            </div>
+            <div class="col-sm-4">
+                <input type="text" name="num_sesion" value="{{s.num_sesion}}">
+            </div>
+          </li>
+        </ul>
+
+        <ul>
+          <li class="row">
+            <div class="col-sm-2">
+                <label>Tema:</label>
+            </div>
+            <div class="col-sm-10">
+                <input type="text" name="tema" value="{{s.tema}}" class="form-control">
+            </div>
+          </li>
+        </ul>
+
+        <ul class="row">
+          <li>
+            <div class="col-sm-2">
+                <label>Etapa del modelo:</label>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" name="etapa_del_modelo" value="{{s.etapa_del_modelo}}" class="form-control">
+            </div>
+          </li>
+          <li>
+            <div class="col-sm-2">
+                <label>Tecnica de Enseñanza:</label>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" name="tecnica_de_ensenanza" value="{{s.tecnica_de_ensenanza}}" class="form-control">
+            </div>
+          </li>
+          <li>
+            <div class="col-sm-2">
+                <label>Recursos:</label>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" name="recursos" value="{{s.recursos}}" class="form-control">
+            </div>
+          </li>
+        </ul>
+
+        <ul>
+          <li class="row">
+            <div class="col-sm-2">
+                <label>Descripcion de la actividad:</label>
+            </div>
+            <div class="col-sm-10">
+                <input type="text" name="descripcion_de_la_actividad" value="{{s.descripcion_de_la_actividad}}" class="form-control">
+            </div>
+          </li>
+        </ul>
+
+        <table class="col-md-6 col-sm-offset-3">
+          <tr>
+            <td>Cursos</td>
+            <td>Fechas</td>
+          </tr>
+          <tr>
+            <td>
+              <ul ng-repeat="cs in s.cursosesion" >
+                <li><input type="text" name="curso" value="{{cs}}"></li>
+              </ul>
+            </td>
+            <td>
+              <ul ng-repeat="fs in s.fechasesion track by $index" >
+                <li><input type="text" name="fecha" value="{{fs}}"></li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div class="container-fluid footer-amarillo"></div>
+
+      <div class="panel_observaciones_logros row">
+
+        <label>Evaluacion para los estudiantes</label>
+        <input type="text" name="evaluacion" class="form-control">
+
+        <label>observacion_docente</label>
+        <input type="text" name="observacion_docente" class="form-control">
+
+      </div>
+
+      <input type="submit" name="submitButton" value="Crear Logro" class="btn btn-primary col-sm-offset-5 col-sm-1">
+    </form>
+
+  </div>

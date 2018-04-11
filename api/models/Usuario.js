@@ -29,7 +29,7 @@ module.exports = {
     },
     profesores_a_cargo: {
       collection: 'coordinador_Docente',
-      via: 'id_profesor'
+      via: 'id_coordinador'
     },
     mallas: {
       collection: 'malla',

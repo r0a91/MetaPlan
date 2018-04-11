@@ -12,7 +12,7 @@ module.exports = {
       model: 'usuario'
     },
     id_profesor: {
-      model: 'usuario'
+      type:'string'
     },
     comentarios: {
       collection: 'comentario',

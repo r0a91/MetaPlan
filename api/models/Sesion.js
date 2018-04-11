@@ -9,17 +9,34 @@ module.exports = {
 
   attributes: {
     num_sesion: {
-      type: 'integer',
-      autoIncrement: true
+      type: 'string',
     },
     logro: {
       model: 'logro'
     },
-    descripcion: {
+    tema:{
+      type: 'string'
+    },
+    etapa_del_modelo:{
+      type: 'string'
+    },
+    tecnica_de_ensenanza: {
+      type: 'string'
+    },
+    recursos: {
+      type:'string'
+    },
+    descripcion_de_la_actividad: {
       type: 'string'
     },
     fecha: {
       type: 'date'
+    },
+    curso: {
+      model:'curso'
+    },
+    nivel:{
+      model: 'nivel'
     }
   }
 };
