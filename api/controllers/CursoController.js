@@ -7,6 +7,7 @@
 
 module.exports = {
 	create: function (req, res) {
+		//Creates a Curso
 		var obj = {
 			num_curso: req.param('num_curso')
 		}

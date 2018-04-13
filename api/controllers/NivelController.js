@@ -7,6 +7,7 @@
 
 module.exports = {
 	create: function (req, res) {
+		//Creates a new Nivel in the DB
 		var obj = {
 			nombre: req.param('nombre')
 		}

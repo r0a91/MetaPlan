@@ -7,6 +7,7 @@
 
 module.exports = {
 	new: function (req, res) {
+		//shows the form to create a new Malla in forms/Malla
 		var usuarioDB = null
 		var nivelesDB =[]
 		var cursosDB = []
@@ -75,7 +76,7 @@ module.exports = {
 		}
 	},
 	create:function (req, res) {
-
+		//Creates de Malla input in the DB
 		var mensaje = {error:null, datos:null, mensaje:null}
 		mallaobj={
 			docente:req.param('id'),

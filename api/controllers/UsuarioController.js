@@ -7,6 +7,7 @@
 
 module.exports = {
   create:function (req, res) {
+    //Creates a new User in the DB
     var obj = {
 			nombre: req.param('nombre'),
       apellido: req.param('apellido'),
@@ -25,12 +26,14 @@ module.exports = {
 		})
   },
   mostrarLogin: function (req, res) {
+    //Shows the login view located in pages/login
     res.view('pages/login', {
       layout:'layouts/publicLayout',
       error: null
     })
   },
   login: function (req, res) {
+    //Login a user with a given email and password which is the user nit
     var mensaje = {error:null, datos:null, mensaje:null}
     var user = null
     var permisos = []
@@ -45,11 +48,13 @@ module.exports = {
 		],finalizar)
 
     function validar(done) {
+      //Validates if the email and password are empty or not
       if (!req.body.correo) mensaje.error="Correo o Password incorrectos";
       if (!req.body.password) mensaje.error="Correo o Password incorrectos";
       done()
     }
     function consultarUsuario(done) {
+      //get the user with the given email. 
       if (mensaje.error) return done();
       Usuario.findOne({correo: req.body.correo})
       .populate('rol')
@@ -67,6 +72,7 @@ module.exports = {
       })
     }
     function compararDatos(done) {
+      //If there is a user with the email, compares the password which is the nit.
       if (mensaje.error) return done();
       if (req.body.correo == user.correo) {
         if (req.body.password == user.nit) {
@@ -81,6 +87,7 @@ module.exports = {
       done()
     }
     function generarAutorizacion(done) {
+      //If the input is correct generates a session and assign the user id to it.
       if (mensaje.error) return done();
       req.session.regenerate(function(){
 				req.session.me = user.id
@@ -89,12 +96,14 @@ module.exports = {
 			})
     }
     function finalizar() {
+      //if the input is incorrect shows the login view again.
       if (mensaje.error) {
         res.view('pages/login', {
 					layout: 'layouts/publicLayout',
 					error: mensaje.error
 				})
       }else {
+        //If the input is correct shows the respective view for each user. Docente, Coordinador, Administrador
         if (user.rol.nombre=="Docente") {
           res.redirect('/showdocente')
         }else if (user.rol.nombre=="Coordinador") {
@@ -109,6 +118,7 @@ module.exports = {
     }
   },
   logout: function (req, res) {
+    //Destroy the session created in the login proccess and redirect to the login view
     req.session.destroy(function(err) {
       if (err) {
         return res.json(err)
@@ -117,7 +127,7 @@ module.exports = {
 		});
   },
   edit: function (req, res, next) {
-
+    // Load the data of the user that has to be edited.
     var user=null
     var mallas=[]
     var profes=[]
@@ -128,6 +138,7 @@ module.exports = {
 		],finalizar)
 
     function consultarUsuario(done) {
+      //Search the user given an id
       Usuario.findOne(req.param('id'))
       .exec(function (err, userFounded) {
         if (err) {
@@ -141,6 +152,7 @@ module.exports = {
     }
 
     function consultarMallas(done) {
+      //Search the Mallas asociated to the user
       Malla.find({docente:req.param('id')}, function (err, mallasFounded) {
         if (err) {
           return done()
@@ -150,6 +162,7 @@ module.exports = {
       })
     }
     function consultarProfesoresACargo(done) {
+      //Search the docents asociated to the user
       Coordinador_Docente.find({id_coordinador:req.param('id')}, function (err, profesFounded) {
         if (err) {
           return done()
@@ -159,6 +172,7 @@ module.exports = {
       })
     }
     function finalizar() {
+      //Loads the view usuario/edit and pass the information 
       res.view('/usuario/edit', {
         layout:'layouts/administradorLayout',
         user:userFounded,
@@ -169,6 +183,7 @@ module.exports = {
 
   },
   update: function (req, res, next) {
+    //update the user information 
     var userObj = {
       nombre: req.param('nombre'),
       apellido: req.param('apellido'),
@@ -186,14 +201,72 @@ module.exports = {
     })
   },
   destroy: function (req, res, next) {
+    //Deletes a user given an id.
+    var mallasIDs = []
+    var logrosIDs = []
 
     async.series([
+      searchMallas,
+      searchLogros,
+      destruirSesiones,
+      destruirLogros,
 			destruirMallas,
 			destruirDocentesAsignados,
       destruirCoordinadorAsignado
 		],finalizar)
 
+
+    function searchMallas(done) {
+      //First search every Malla asociated to the user id
+      Malla.find({docente : req.param('id')}, function (err, mallasFounded) {
+        if (err) {
+          return done()
+        } 
+
+        for (var k = 0; k < mallasFounded.length; k++) {
+          mallasIDs.push(mallasFounded[k].id)
+        }
+         
+        done()
+      })
+    }
+
+    function searchLogros(done) {
+      //Search every Logro asociated with evert Malla found previously
+      Logro.find({malla : mallasIDs}, function (err, logrosFounded) {
+        if (err) {
+          return done()
+        } 
+
+        for (var k = 0; k < logrosFounded.length; k++) {
+          logrosIDs.push(logrosFounded[k].id)
+        }
+         
+        done()
+      })
+    }
+
+    function destruirSesiones(done) {
+      //Destroy every Sesion asociated with every Logro found
+      Sesion.destroy({logro: logrosIDs}, function (err) {
+        if (err) {
+          return done()
+        }
+        done()
+      })
+    }
+
+    function destruirLogros(done) {
+      //Destroy every Logro asociated with every Malla found
+      Logro.destroy({id : logrosIDs}, function (err) {
+        if (err) {
+          return done()
+        }
+        done()
+      })
+    }
     function destruirMallas(done) {
+      //Destroy every Malla asociated with the user ID
       Malla.destroy({docente : req.param('id')}, function (err) {
         if (err) {
           return done()
@@ -203,6 +276,7 @@ module.exports = {
     }
 
     function destruirDocentesAsignados(done) {
+      //Now it can destroy every relationship whith the other users if the user is a Coordinador
       Coordinador_Docente.destroy({id_profesor: req.param('id')}, function (err) {
         if (err) {
           return done()
@@ -211,6 +285,7 @@ module.exports = {
       })
     }
     function destruirCoordinadorAsignado(done) {
+       //Now it can destroy every relationship whith the other users if the user is a Docente
       Coordinador_Docente.destroy({id_coordinador: req.param('id')}, function (err) {
         if (err) {
           return done()
@@ -220,6 +295,7 @@ module.exports = {
     }
 
     function finalizar() {
+      //Finally destroys the given user
       Usuario.destroy(req.param('id'), function userDestroyed(err) {
         if (err) {
           return next(err)
@@ -227,11 +303,5 @@ module.exports = {
         res.redirect('/showadministrador')
       })
     }
-  },
-  adicionarMalla: function (req, res) {
-
-  },
-  adicionarDocente: function (req, res) {
-
   }
 };

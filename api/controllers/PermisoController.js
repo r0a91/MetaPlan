@@ -7,6 +7,7 @@
 
 module.exports = {
 	create: function (req, res) {
+		//Creates a new Permiso in the DB
 		var obj = {
 			num_permiso: req.param('num_permiso')
 		}

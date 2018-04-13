@@ -7,7 +7,7 @@
 
 module.exports = {
   new: function (req, res) {
-
+    //shows the form to create a new Logro in docente/logro
     var malla1=null
 
     async.series([
@@ -34,7 +34,7 @@ module.exports = {
     function finalizar() {
       //console.log("FinalizarLgroController");
       //console.log(malla1);
-      res.view('docente/newLogro', {
+      res.view('docente/logro', {
         layout: 'layouts/docenteLayout',
         malla: malla1,
         periodo: req.param('periodo')
@@ -43,6 +43,7 @@ module.exports = {
 
   },
   create: function functionName(req, res, next) {
+    //Creates a new Logro called with the post Method in the view Docente/logro
     //console.log("ENTRO A CREATE LOGRO");
     async.waterfall(
 			[

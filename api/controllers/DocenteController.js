@@ -7,6 +7,7 @@
 
 module.exports = {
 	index: function (req, res) {
+		//Shows The Index view a user with a Docente rol is logged in
 		var mensaje = {error:null, datos:null, mensaje:null}
 		var docenteDB=null
 		var mallasDB=[]
@@ -60,6 +61,7 @@ module.exports = {
 
 	},
 	edit: function (req, res, next) {
+		//Shows The view to edit users
 		Usuario.findOne(req.param('id'), function userFounded(err, user) {
 			if (err) {
 				return next(err)

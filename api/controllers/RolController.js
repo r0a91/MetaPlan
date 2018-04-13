@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  //Registra en la db el rol que se ha creado
+  //Creates a new Rol in the DB
   create: function(req, res) {
     var obj = {
       nombre: req.param('nombre'),

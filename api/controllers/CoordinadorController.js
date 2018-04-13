@@ -6,102 +6,96 @@
  */
 
 module.exports = {
-	index: function (req, res) {
-		res.view('coordinador/index')
-	},
-	edit: function (req, res, next) {
-		Usuario.findOne(req.param('id'), function userFounded(err, user) {
-			if (err) {
-				return next(err)
-			}
-			if(!user){
-				return next()
-			}
-			res.view('usuario/edit', {
-				layout: 'layouts/administradorLayout',
-				user: user
-			})
-		})
-	},
-	agregar: function (req, res) {
-		user=null
-		docentes=[]
 
+	index: function (req, res) {
+		//Load the index view for users with Coordinador rol
+		var coordinadorDB = null;
+		var docentesCoordinador= null;
+		var docentesDB=[];
+		var idsDocentes=[];
+		var mallasDB=[];
 		async.series([
-			consultarCoordinador,
- 			consultarDocentes
+			consultarCoordinador_Docente,
+			consultarDocentes,
+			consultarMallas
 		],finalizar)
 
-		function consultarCoordinador(done) {
-			Usuario.findOne(req.param('id'), function (err, userFounded) {
+		function consultarCoordinador_Docente(done) {
+			console.log("Mi id de session es")
+			console.log(req.session.me)
+			Usuario.findOne(req.session.me)
+			.populate('profesores_a_cargo')
+			.exec(function (err, userFounded) {
 				if (err) {
-					return done()
+					console.log("Error al consultar usuario")
 				}
-				user=userFounded
+				console.log("ENTRO A COORDINADORCONTROLER-> consultarCoordinador_Docente")
+				//console.log(userFounded)
+				coordinadorDB= userFounded
+				docentesCoordinador=userFounded.profesores_a_cargo
+				//console.log(docentesCoordinador)
 				done()
 			})
+			
 		}
 
 		function consultarDocentes(done) {
-
 			Usuario.find()
-			.populate('rol')
+			.populate('mallas')
 			.exec(function (err, usersFounded) {
 				if (err) {
-					return done()
+					console.log("Error al consultar usuarios")
 				}
-				//console.log(usersFounded);
 				for (var i = 0; i < usersFounded.length; i++) {
-					console.log(usersFounded[i]);
-					if (usersFounded[i].rol) {
-						if (usersFounded[i].rol.nombre=="Docente") {
-							docentes.push(usersFounded[i])
+					for (var j = 0; j < docentesCoordinador.length; j++) {
+						if (usersFounded[i].id == docentesCoordinador[j].id_profesor) {
+							docentesDB.push(usersFounded[i]) 
+							idsDocentes.push(usersFounded[i].id)
 						}
-					}
+					}	
 				}
+				//console.log("Los docentes de este coordinador son:")
+				console.log(docentesDB)
 				done()
 			})
 		}
-		function finalizar() {
-			res.view('coordinador/agregar', {
-				layout: 'layouts/administradorLayout',
-				user: user,
-				docentes:docentes
-			})
-		}
-	},
-	agregardocentes:function (req, res) {
-		console.log("Entro a agregarDocentes");
-		var docentes=req.param('docentes')
-		console.log("Es array?");
-		console.log(Array.isArray(req.param('docentes')));
-
-		if (Array.isArray(req.param('docentes'))) {
-			for (var i = 0; i < docentes.length; i++) {
-				var obj={
-					id_coordinador:req.param('id'),
-					id_profesor:docentes[i]
-				}
-				Coordinador_Docente.create(obj).exec(function (err, docente_agregado) {
-					if (err) {
-						return res.json(err)
-					}
-				})
-			}
-		}else {
-			var obj={
-				id_coordinador:req.param('id'),
-				id_profesor:req.param('docentes')
-			}
-			Coordinador_Docente.create(obj).exec(function (err, docente_agregado) {
+		function consultarMallas(done) {
+			
+			Malla.find()
+			.populate('nivel')
+			.populate('cursos')
+			.populate('logros')
+			.exec(function (err, mallasFounded) {
 				if (err) {
-					return res.json(err)
+					console.log(err)
 				}
+
+				for (var i = 0; i < docentesDB.length; i++) {
+					for (var j = 0; j < docentesDB[i].mallas.length; j++) {
+						for (var k = 0; k < mallasFounded.length; k++) {
+							if (mallasFounded[k].id==docentesDB[i].mallas[j].id) {
+								mallasDB.push(mallasFounded[k])
+							}
+						}	
+					}
+				}
+				console.log("MALLAS BUSCADAS y COMPARADAS")
+				console.log(mallasDB)
+				done()
 			})
 		}
 
-		res.redirect('showadministrador')
+		function finalizar() {
+			res.view('coordinador/index', {
+				layout:'layouts/administradorLayout', 
+				coordinador: coordinadorDB , 
+				docentesACargo: docentesDB , 
+				mallas: mallasDB
+			})
+		}
 
-
+	},
+	agregarComentarios: function (req, res) {
+		
 	}
 };

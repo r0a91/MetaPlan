@@ -45,13 +45,16 @@ module.exports.routes = {
   'get /newPermiso':'FormsController.newPermiso',
   'get /newRol':'FormsController.newRol',
   'get /newUsuario':'FormsController.newUsuario',
+
+  
+
   'post /createPermiso': 'PermisoController.create',
   'post /createRol': 'RolController.create',
   'post /createCurso': 'CursoController.create',
   'post /createnivel': 'NivelController.create',
   'post /createusuario': 'UsuarioController.create',
   'post /malla/new': 'MallaController.new',
-
+  'post /administrador/agregardocentes': 'AdministradorController.agregardocentes',
 
 
   /*Docente routes */
@@ -63,9 +66,8 @@ module.exports.routes = {
 
   /*Coordinador routes */
   'get /showcoordinador':'CoordinadorController.index',
-  'get /coordinador/edit': 'CoordinadorController.edit',
-  'get /coordinador/agregar': 'CoordinadorController.agregar',
-  'post /coordinador/agregardocentes': 'CoordinadorController.agregardocentes',
+  'get /administrador/edit': 'AdministradorController.edit',
+  'get /administrador/vincular': 'AdministradorController.vincular'
 
 
   /***************************************************************************

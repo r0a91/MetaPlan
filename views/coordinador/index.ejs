@@ -1,1 +1,84 @@
 <h1>VISTA COORDINADOR</h1>
+<!-- Shows all the Docentes assigned to a Coordinador and allows to make comments of their progress. -->
+<div class="container">
+    <h1>COORDINADOR</h1>
+    <h2><%= coordinador.nombre%> <%= coordinador.apellido%></h2>
+
+    <div class="docentes_a_cargo">
+        <form action="/administrador/agregardocentes/<%= user.id %>" method="post">
+        <h2>Docentes a Cargo</h2>
+        <% _.each(docentesACargo, function (docente) { %>
+            
+            <h3><%= docente.nombre%> <%=docente.apellido%></h3>
+            
+            <% _.each(mallas, function (malla) { %>
+                <% if(malla.docente==docente.id){ %>
+                    <h3><%= malla.asignatura %></h3>
+                    <table class="table table-condensed">
+                        <thead class="thead-inverse">
+                            <tr>
+                              <th>Primer Periodo</th>
+                              <th>Segundo Periodo</th>
+                              <th>Tercer Periodo</th>
+                              <th>Cuarto Periodo</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            <tr>
+                                
+                                    <td>
+                                        <% _.each(malla.logros, function (logro) { %>
+                                            <ul>
+                                                <% if(logro.periodo=="01"){ %>
+                                                    <li><%= logro.objetivo_general %></li>
+                                                <%}%>
+                                            </ul>
+                                        <% }) %>
+                                    </td>
+                                    <td>
+                                            <% _.each(malla.logros, function (logro) { %>
+                                                <ul>
+                                                    <% if(logro.periodo=="02"){ %>
+                                                        <li><%= logro.objetivo_general %></li>
+                                                    <%}%>
+                                                </ul>
+                                            <% }) %>
+                                    </td>
+                                    <td>
+                                            <% _.each(malla.logros, function (logro) { %>
+                                                <ul>
+                                                    <% if(logro.periodo=="03"){ %>
+                                                        <li><%= logro.objetivo_general %></li>
+                                                    <%}%>
+                                                </ul>
+                                            <% }) %>
+                                    </td>
+                                    <td>
+                                            <% _.each(malla.logros, function (logro) { %>
+                                                <ul>
+                                                    <% if(logro.periodo=="04"){ %>
+                                                        <li><%= logro.objetivo_general %></li>
+                                                    <%}%>
+                                                </ul>
+                                            <% }) %>
+                                    </td>                    
+                            </tr>
+                          </tbody>
+
+                    </table>
+                <% }%>
+            <% }) %>
+            
+            
+                    <div class="form-group">
+                            <label for="comment">Comentario al docente:</label>
+                            <input type="text" class="form-control" name="texto"> 
+                    </div>
+                    <button type="submit" name="button">Agregar Comentario</button>
+        <% }) %>
+
+        
+    </form>
+    </div>
+</div>

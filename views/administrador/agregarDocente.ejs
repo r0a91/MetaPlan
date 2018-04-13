@@ -1,11 +1,11 @@
 <div class="container">
   <h1>Agregar Docente a Coordinador</h1>
-
+  <!-- Allows a Coordinador to be added many Docentes. -->
   <h2>Coordinador: <%= user.nombre%> <%= user.apellido%></h2>
 
   <h2>Docentes</h2>
 
-    <form class="docentes" action="/coordinador/agregardocentes/<%= user.id %>" method="post">
+    <form class="docentes" action="/administrador/agregardocentes/<%= user.id %>" method="post">
       <% _.each(docentes, function (docente) { %>
         <div class="row">
           <label><input type="checkbox" name="docentes" value="<%= docente.id %>"> <%=docente.nombre %></label>

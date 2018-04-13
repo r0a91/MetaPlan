@@ -1,7 +1,8 @@
 <div class="container">
+  <!-- View showed when a Docente Control logs in. -->
   <h1>VISTA DOCENTE</h1>
   <h2><%= docente.nombre%> <%= docente.apellido%></h2>
-
+  <!-- Shows all the Mallas that the Docente has, and allow him to create new logros for each subject -->
   <div class="Asignaturas">
       <h2>Asignaturas</h2>
 
@@ -20,7 +21,7 @@
             <li><%= malla.cursos[i].num_curso %></li>
           <% } %>
         </ul>
-
+        <!-- It is organized in quarters -->
         <table class="table table-condensed">
           <thead class="thead-inverse">
             <tr>
@@ -31,14 +32,14 @@
             </tr>
           </thead>
           <tbody>
-
+              <!-- show all the Logros created and allow to create more -->
               <tr>
 
                   <td>
                     <% for(var i=0; i<malla.logros.length; i++) {%>
                       <ul>
                         <% if(malla.logros[i].periodo === "01"){  %>
-                        <li><a href="#"><%= malla.logros[i].objetivo_general %></a></li>
+                        <li><a href="#"><%= malla.logros[i].objetivo_general %></a><a href="#" class="btn btn-danger">X</a></li>
                         <% } %>
                       </ul>
                     <% } %>
@@ -47,7 +48,7 @@
                     <% for(var i=0; i<malla.logros.length; i++) {%>
                       <ul>
                         <% if(malla.logros[i].periodo === "02"){  %>
-                        <li><a href="#"><%= malla.logros[i].objetivo_general %></a></li>
+                          <li><a href="#"><%= malla.logros[i].objetivo_general %></a><a href="#" class="btn btn-danger">X</a></li>
                         <% } %>
                       </ul>
                     <% } %>
@@ -56,7 +57,7 @@
                     <% for(var i=0; i<malla.logros.length; i++) {%>
                       <ul>
                         <% if(malla.logros[i].periodo === "03"){  %>
-                        <li><a href="#"><%= malla.logros[i].objetivo_general %></a></li>
+                          <li><a href="#"><%= malla.logros[i].objetivo_general %></a><a href="#" class="btn btn-danger">X</a></li>
                         <% } %>
                       </ul>
                     <% } %>
@@ -65,7 +66,7 @@
                     <% for(var i=0; i<malla.logros.length; i++) {%>
                       <ul>
                         <% if(malla.logros[i].periodo === "04"){  %>
-                        <li><a href="#"><%= malla.logros[i].objetivo_general %></a></li>
+                          <li><a href="#"><%= malla.logros[i].objetivo_general %></a><a href="#" class="btn btn-danger">X</a></li>
                         <% } %>
                       </ul>
                     <% } %>
